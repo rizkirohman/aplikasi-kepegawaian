@@ -16,3 +16,7 @@ Route::post('/logout', [AuthController::class, 'logout'])
 Route::get('/', [DashboardController::class, 'index'])
     ->middleware('auth')
     ->name('dashboard');
+
+Route::get('/admin-test', function () {
+    return 'Halaman khusus Admin Kepegawaian';
+})->middleware(['auth', 'admin']);
