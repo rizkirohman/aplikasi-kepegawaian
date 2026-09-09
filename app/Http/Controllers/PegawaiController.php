@@ -104,8 +104,9 @@ class PegawaiController extends Controller
     public function show(Pegawai $pegawai)
     {
         $pegawai->load([
-        'unitKerja',
-        'jabatan',
+            'unitKerja',
+            'jabatan',
+            'riwayatPendidikan',
         ]);
 
         return view('pegawai.show', compact('pegawai'));
