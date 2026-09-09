@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Pegawai;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

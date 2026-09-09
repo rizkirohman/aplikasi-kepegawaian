@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UnitKerjaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AuthController::class, 'showLogin'])
@@ -20,3 +21,5 @@ Route::get('/', [DashboardController::class, 'index'])
 Route::get('/admin-test', function () {
     return 'Halaman khusus Admin Kepegawaian';
 })->middleware(['auth', 'admin']);
+
+Route::resource('unit-kerja', UnitKerjaController::class)->middleware(['auth', 'admin']);;

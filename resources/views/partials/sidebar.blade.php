@@ -79,6 +79,13 @@
         </a>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('unit-kerja.index') }}">
+            <i class="fas fa-sitemap"></i>
+            <span>Unit Kerja</span>
+        </a>
+    </li>
+
     <hr class="sidebar-divider d-none d-md-block">
 
     <!-- Toggle Sidebar -->
