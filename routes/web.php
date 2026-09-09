@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\UnitKerjaController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\RiwayatPangkatController;
 use App\Http\Controllers\RiwayatPendidikanController;
 use Illuminate\Support\Facades\Route;
 
@@ -55,3 +56,27 @@ Route::put('pegawai/{pegawai}/riwayat-pendidikan/{riwayatPendidikan}', [RiwayatP
 Route::delete('pegawai/{pegawai}/riwayat-pendidikan/{riwayatPendidikan}', [RiwayatPendidikanController::class, 'destroy'])
     ->middleware(['auth', 'admin'])
     ->name('pegawai.riwayat-pendidikan.destroy');
+
+// Route::get('pegawai/{pegawai}/riwayat-pangkat', [RiwayatPangkatController::class, 'index'])
+//     ->middleware(['auth', 'admin'])
+//     ->name('pegawai.riwayat-pangkat.index');
+
+// Route::get('pegawai/{pegawai}/riwayat-pangkat/create',[RiwayatPangkatController::class, 'create'])
+//     ->middleware(['auth', 'admin'])
+//     ->name('pegawai.riwayat-pangkat.create');
+
+// Route::post('pegawai/{pegawai}/riwayat-pangkat', [RiwayatPangkatController::class, 'store'])
+//     ->name('pegawai.riwayat-pangkat.store')
+//     ->middleware(['auth', 'admin']);
+
+// Route::get('pegawai/{pegawai}/riwayat-pangkat/{riwayatPangkat}/edit', [RiwayatPangkatController::class, 'edit'])
+//     ->name('pegawai.riwayat-pangkat.edit')
+//     ->middleware(['auth', 'admin']);
+
+// Route::put('pegawai/{pegawai}/riwayat-pangkat/{riwayatPangkat}', [RiwayatPangkatController::class, 'update'])
+//     ->name('pegawai.riwayat-pangkat.update')
+//     ->middleware(['auth', 'admin']);
+
+Route::resource('pegawai.riwayat-pangkat', RiwayatPangkatController::class)
+    ->middleware(['auth', 'admin'])
+    ->except(['show']);
