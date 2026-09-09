@@ -182,7 +182,8 @@
                         <div class="col-md-12 mb-3">
                             <label for="alamat">Alamat</label>
 
-                            <textarea name="alamat" id="alamat" rows="3" class="form-control">{{ old('alamat') }}</textarea>
+                            <textarea name="alamat" id="alamat" rows="3" class="form-control"
+                                placeholder="Contoh: Jl. Wastukencana No. 2, Babakan Ciamis, Kec. Sumur Bandung, Kota Bandung, Jawa Barat">{{ old('alamat') }}</textarea>
                         </div>
 
                         {{-- No HP --}}
