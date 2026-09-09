@@ -30,8 +30,8 @@
         Kepegawaian
     </div>
 
-    <li class="nav-item">
-        <a class="nav-link" href="#">
+    <li class="nav-item {{ Request::is('pegawai*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('pegawai.index') }}">
             <i class="fas fa-fw fa-users"></i>
             <span>Data Pegawai</span>
         </a>

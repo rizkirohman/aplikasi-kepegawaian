@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\UnitKerjaController;
+use App\Http\Controllers\PegawaiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AuthController::class, 'showLogin'])
@@ -26,3 +27,6 @@ Route::get('/admin-test', function () {
 Route::resource('unit-kerja', UnitKerjaController::class)->middleware(['auth', 'admin']);;
 
 Route::resource('jabatan', JabatanController::class)->middleware(['auth', 'admin']);
+
+Route::resource('pegawai', PegawaiController::class)
+    ->middleware(['auth', 'admin']);
