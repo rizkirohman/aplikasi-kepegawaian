@@ -79,10 +79,17 @@
         </a>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item {{ Request::is('unit-kerja*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('unit-kerja.index') }}">
             <i class="fas fa-sitemap"></i>
             <span>Unit Kerja</span>
+        </a>
+    </li>
+
+    <li class="nav-item {{ Request::is('jabatan*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('jabatan.index') }}">
+            <i class="fas fa-fw fa-id-card-alt"></i>
+            <span>Jabatan</span>
         </a>
     </li>
 

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\UnitKerjaController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,5 @@ Route::get('/admin-test', function () {
 })->middleware(['auth', 'admin']);
 
 Route::resource('unit-kerja', UnitKerjaController::class)->middleware(['auth', 'admin']);;
+
+Route::resource('jabatan', JabatanController::class)->middleware(['auth', 'admin']);
