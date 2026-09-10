@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\UnitKerjaController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\RiwayatJabatanController;
 use App\Http\Controllers\RiwayatPangkatController;
 use App\Http\Controllers\RiwayatPendidikanController;
 use Illuminate\Support\Facades\Route;
@@ -80,3 +81,27 @@ Route::delete('pegawai/{pegawai}/riwayat-pendidikan/{riwayatPendidikan}', [Riway
 Route::resource('pegawai.riwayat-pangkat', RiwayatPangkatController::class)
     ->middleware(['auth', 'admin'])
     ->except(['show']);
+
+Route::get('pegawai/{pegawai}/riwayat-jabatan', [RiwayatJabatanController::class, 'index'])
+    ->name('pegawai.riwayat-jabatan.index')
+    ->middleware(['auth', 'admin']);
+
+Route::get('pegawai/{pegawai}/riwayat-jabatan/create', [RiwayatJabatanController::class, 'create'])
+    ->name('pegawai.riwayat-jabatan.create')
+    ->middleware(['auth', 'admin']);
+
+Route::post('pegawai/{pegawai}/riwayat-jabatan', [RiwayatJabatanController::class, 'store'])
+    ->name('pegawai.riwayat-jabatan.store')
+    ->middleware(['auth', 'admin']);
+
+Route::get('pegawai/{pegawai}/riwayat-jabatan/{riwayatJabatan}/edit', [RiwayatJabatanController::class, 'edit'])
+    ->name('pegawai.riwayat-jabatan.edit')
+    ->middleware(['auth', 'admin']);
+
+Route::put('pegawai/{pegawai}/riwayat-jabatan/{riwayatJabatan}', [RiwayatJabatanController::class, 'update'])
+    ->name('pegawai.riwayat-jabatan.update')
+    ->middleware(['auth', 'admin']);
+
+Route::delete('pegawai/{pegawai}/riwayat-jabatan/{riwayatJabatan}', [RiwayatJabatanController::class, 'destroy'])
+    ->name('pegawai.riwayat-jabatan.destroy')
+    ->middleware(['auth', 'admin']);

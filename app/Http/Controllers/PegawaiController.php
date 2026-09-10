@@ -17,7 +17,7 @@ class PegawaiController extends Controller
     {
         $pegawais = Pegawai::with(['unitKerja', 'jabatan'])
             ->latest()
-            ->paginate(10);
+            ->paginate(5);
 
         return view('pegawai.index', compact('pegawais'));
     }
@@ -107,6 +107,8 @@ class PegawaiController extends Controller
             'unitKerja',
             'jabatan',
             'riwayatPendidikan',
+            'riwayatPangkat',
+            'riwayatJabatan',
         ]);
 
         return view('pegawai.show', compact('pegawai'));

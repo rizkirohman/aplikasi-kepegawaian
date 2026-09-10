@@ -383,6 +383,35 @@
                                 </div>
                             </div>
 
+                            {{-- Riwayat Jabatan --}}
+                            <div class="col-md-4 mb-3">
+                                <div class="card border-left-primary h-100">
+                                    <div class="card-body">
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Riwayat Jabatan
+                                                </div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                                    {{ $pegawai->riwayatJabatan->count() }} Data
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-briefcase fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+
+                                        <hr>
+
+                                        <a href="{{ route('pegawai.riwayat-jabatan.index', $pegawai->id) }}"
+                                            class="btn btn-primary btn-sm">
+                                            <i class="fas fa-eye mr-1"></i>
+                                            Lihat Riwayat Jabatan
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
