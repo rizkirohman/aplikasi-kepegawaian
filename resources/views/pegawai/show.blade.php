@@ -416,6 +416,46 @@
                     </div>
                 </div>
 
+                {{-- Dokumen Kepegawaian --}}
+                <div class="card shadow mb-4">
+
+                    <div class="card-header py-3 d-flex align-items-center justify-content-between">
+
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            Dokumen Kepegawaian
+                        </h6>
+
+                        <span class="badge badge-primary">
+                            {{ $pegawai->dokumen->count() }} Dokumen
+                        </span>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="d-flex align-items-center justify-content-between">
+
+                            <div>
+                                <i class="fas fa-folder-open fa-2x text-gray-300 mr-3"></i>
+
+                                <span class="text-muted">
+                                    Dokumen kepegawaian {{ $pegawai->nama_lengkap }}
+                                </span>
+                            </div>
+
+                            <a href="{{ route('pegawai.dokumen.index', $pegawai->id) }}" class="btn btn-primary btn-sm">
+
+                                <i class="fas fa-folder-open"></i>
+                                Lihat Dokumen
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
 
         </div>

@@ -109,6 +109,7 @@ class PegawaiController extends Controller
             'riwayatPendidikan',
             'riwayatPangkat',
             'riwayatJabatan',
+            'dokumen',
         ]);
 
         return view('pegawai.show', compact('pegawai'));
