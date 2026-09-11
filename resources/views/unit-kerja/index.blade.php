@@ -72,7 +72,6 @@
                                         <a href="{{ route('unit-kerja.edit', $unitKerja->id) }}"
                                             class="btn btn-warning btn-sm">
                                             <i class="fas fa-edit"></i>
-                                            Edit
                                         </a>
 
                                         <form action="{{ route('unit-kerja.destroy', $unitKerja->id) }}" method="POST"
@@ -84,7 +83,6 @@
                                             <button type="submit" class="btn btn-danger btn-sm"
                                                 onclick="return confirm('Yakin ingin menghapus unit kerja ini?')">
                                                 <i class="fas fa-trash"></i>
-                                                Hapus
                                             </button>
 
                                         </form>

@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\DokumenPegawai;
 use App\Models\RiwayatJabatan;
 use App\Models\RiwayatPangkat;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;

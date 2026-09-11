@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DokumenPegawaiController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\UnitKerjaController;
 use App\Http\Controllers\PegawaiController;
@@ -58,50 +59,61 @@ Route::delete('pegawai/{pegawai}/riwayat-pendidikan/{riwayatPendidikan}', [Riway
     ->middleware(['auth', 'admin'])
     ->name('pegawai.riwayat-pendidikan.destroy');
 
-// Route::get('pegawai/{pegawai}/riwayat-pangkat', [RiwayatPangkatController::class, 'index'])
-//     ->middleware(['auth', 'admin'])
-//     ->name('pegawai.riwayat-pangkat.index');
-
-// Route::get('pegawai/{pegawai}/riwayat-pangkat/create',[RiwayatPangkatController::class, 'create'])
-//     ->middleware(['auth', 'admin'])
-//     ->name('pegawai.riwayat-pangkat.create');
-
-// Route::post('pegawai/{pegawai}/riwayat-pangkat', [RiwayatPangkatController::class, 'store'])
-//     ->name('pegawai.riwayat-pangkat.store')
-//     ->middleware(['auth', 'admin']);
-
-// Route::get('pegawai/{pegawai}/riwayat-pangkat/{riwayatPangkat}/edit', [RiwayatPangkatController::class, 'edit'])
-//     ->name('pegawai.riwayat-pangkat.edit')
-//     ->middleware(['auth', 'admin']);
-
-// Route::put('pegawai/{pegawai}/riwayat-pangkat/{riwayatPangkat}', [RiwayatPangkatController::class, 'update'])
-//     ->name('pegawai.riwayat-pangkat.update')
-//     ->middleware(['auth', 'admin']);
-
 Route::resource('pegawai.riwayat-pangkat', RiwayatPangkatController::class)
     ->middleware(['auth', 'admin'])
     ->except(['show']);
 
-Route::get('pegawai/{pegawai}/riwayat-jabatan', [RiwayatJabatanController::class, 'index'])
-    ->name('pegawai.riwayat-jabatan.index')
+// Route::get('pegawai/{pegawai}/riwayat-jabatan', [RiwayatJabatanController::class, 'index'])
+//     ->name('pegawai.riwayat-jabatan.index')
+//     ->middleware(['auth', 'admin']);
+
+// Route::get('pegawai/{pegawai}/riwayat-jabatan/create', [RiwayatJabatanController::class, 'create'])
+//     ->name('pegawai.riwayat-jabatan.create')
+//     ->middleware(['auth', 'admin']);
+
+// Route::post('pegawai/{pegawai}/riwayat-jabatan', [RiwayatJabatanController::class, 'store'])
+//     ->name('pegawai.riwayat-jabatan.store')
+//     ->middleware(['auth', 'admin']);
+
+// Route::get('pegawai/{pegawai}/riwayat-jabatan/{riwayatJabatan}/edit', [RiwayatJabatanController::class, 'edit'])
+//     ->name('pegawai.riwayat-jabatan.edit')
+//     ->middleware(['auth', 'admin']);
+
+// Route::put('pegawai/{pegawai}/riwayat-jabatan/{riwayatJabatan}', [RiwayatJabatanController::class, 'update'])
+//     ->name('pegawai.riwayat-jabatan.update')
+//     ->middleware(['auth', 'admin']);
+
+// Route::delete('pegawai/{pegawai}/riwayat-jabatan/{riwayatJabatan}', [RiwayatJabatanController::class, 'destroy'])
+//     ->name('pegawai.riwayat-jabatan.destroy')
+//     ->middleware(['auth', 'admin']);
+
+Route::resource('pegawai.riwayat-jabatan', RiwayatJabatanController::class)
     ->middleware(['auth', 'admin']);
 
-Route::get('pegawai/{pegawai}/riwayat-jabatan/create', [RiwayatJabatanController::class, 'create'])
-    ->name('pegawai.riwayat-jabatan.create')
+Route::get('pegawai/{pegawai}/dokumen', [DokumenPegawaiController::class, 'index'])
+    ->name('pegawai.dokumen.index')
     ->middleware(['auth', 'admin']);
 
-Route::post('pegawai/{pegawai}/riwayat-jabatan', [RiwayatJabatanController::class, 'store'])
-    ->name('pegawai.riwayat-jabatan.store')
+Route::get('pegawai/{pegawai}/dokumen/create', [DokumenPegawaiController::class, 'create'])
+    ->name('pegawai.dokumen.create')
     ->middleware(['auth', 'admin']);
 
-Route::get('pegawai/{pegawai}/riwayat-jabatan/{riwayatJabatan}/edit', [RiwayatJabatanController::class, 'edit'])
-    ->name('pegawai.riwayat-jabatan.edit')
+Route::post('pegawai/{pegawai}/dokumen', [DokumenPegawaiController::class, 'store'])
+    ->name('pegawai.dokumen.store')
     ->middleware(['auth', 'admin']);
 
-Route::put('pegawai/{pegawai}/riwayat-jabatan/{riwayatJabatan}', [RiwayatJabatanController::class, 'update'])
-    ->name('pegawai.riwayat-jabatan.update')
+Route::get('pegawai/{pegawai}/dokumen/{dokumen}/download', [DokumenPegawaiController::class, 'download'])
+    ->name('pegawai.dokumen.download')
     ->middleware(['auth', 'admin']);
 
-Route::delete('pegawai/{pegawai}/riwayat-jabatan/{riwayatJabatan}', [RiwayatJabatanController::class, 'destroy'])
-    ->name('pegawai.riwayat-jabatan.destroy')
+Route::get('pegawai/{pegawai}/dokumen/{dokumen}/edit', [DokumenPegawaiController::class, 'edit'])
+    ->name('pegawai.dokumen.edit')
+    ->middleware(['auth', 'admin']);
+
+Route::put('pegawai/{pegawai}/dokumen/{dokumen}', [DokumenPegawaiController::class, 'update'])
+    ->name('pegawai.dokumen.update')
+    ->middleware(['auth', 'admin']);
+
+Route::delete('pegawai/{pegawai}/dokumen/{dokumen}', [DokumenPegawaiController::class, 'destroy'])
+    ->name('pegawai.dokumen.destroy')
     ->middleware(['auth', 'admin']);

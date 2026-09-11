@@ -71,7 +71,6 @@
 
                                         <a href="{{ route('jabatan.edit', $jabatan) }}" class="btn btn-warning btn-sm">
                                             <i class="fas fa-edit"></i>
-                                            Edit
                                         </a>
 
                                         <form action="{{ route('jabatan.destroy', $jabatan) }}" method="POST"
@@ -83,7 +82,6 @@
                                             <button type="submit" class="btn btn-danger btn-sm"
                                                 onclick="return confirm('Yakin ingin menghapus jabatan ini?')">
                                                 <i class="fas fa-trash"></i>
-                                                Hapus
                                             </button>
 
                                         </form>

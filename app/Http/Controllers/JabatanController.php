@@ -12,7 +12,7 @@ class JabatanController extends Controller
      */
     public function index()
     {
-        $jabatans = Jabatan::latest()->paginate(10);
+        $jabatans = Jabatan::latest()->paginate(5);
 
         return view('jabatan.index', compact('jabatans'));
     }

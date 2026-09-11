@@ -11,7 +11,7 @@ class UnitKerjaController extends Controller
      */
     public function index()
     {
-        $unitKerjas = UnitKerja::latest()->paginate(10);
+        $unitKerjas = UnitKerja::latest()->paginate(5);
 
         return view('unit-kerja.index', compact('unitKerjas'));
     }
