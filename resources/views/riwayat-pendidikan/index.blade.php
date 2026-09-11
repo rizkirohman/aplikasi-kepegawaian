@@ -46,10 +46,13 @@
                     Kembali ke Detail
                 </a>
 
-                <a href="{{ route('pegawai.riwayat-pendidikan.create', $pegawai->id) }}" class="btn btn-primary">
-                    <i class="fas fa-plus"></i>
-                    Tambah Pendidikan
-                </a>
+                @can('create', App\Models\Pegawai::class)
+                    <a href="{{ route('pegawai.riwayat-pendidikan.create', $pegawai->id) }}" class="btn btn-primary">
+                        <i class="fas fa-plus"></i>
+                        Tambah Riwayat Pendidikan
+                    </a>
+                @endcan
+
             </div>
 
         </div>
@@ -148,24 +151,27 @@
 
                                     <td>
 
-                                        <a href="{{ route('pegawai.riwayat-pendidikan.edit', [$pegawai->id, $riwayat->id]) }}"
-                                            class="btn btn-warning btn-sm">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
+                                        @can('update', $pegawai)
+                                            <a href="{{ route('pegawai.riwayat-pendidikan.edit', [$pegawai->id, $riwayat->id]) }}"
+                                                class="btn btn-warning btn-sm">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        @endcan
 
-                                        <form
-                                            action="{{ route('pegawai.riwayat-pendidikan.destroy', [$pegawai->id, $riwayat->id]) }}"
-                                            method="POST" class="d-inline">
+                                        @can('delete', $pegawai)
+                                            <form
+                                                action="{{ route('pegawai.riwayat-pendidikan.destroy', [$pegawai->id, $riwayat->id]) }}"
+                                                method="POST" class="d-inline">
 
-                                            @csrf
-                                            @method('DELETE')
+                                                @csrf
+                                                @method('DELETE')
 
-                                            <button type="submit" class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Apakah Anda yakin ingin menghapus riwayat pendidikan ini?')">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-
-                                        </form>
+                                                <button type="submit" class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus riwayat pendidikan ini?')">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        @endcan
 
                                     </td>
 

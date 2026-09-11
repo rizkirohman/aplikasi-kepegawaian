@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pegawai;
 use App\Models\RiwayatPendidikan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RiwayatPendidikanController extends Controller
 {
@@ -13,6 +14,8 @@ class RiwayatPendidikanController extends Controller
      */
     public function index(Pegawai $pegawai)
     {
+        Gate::authorize('view', $pegawai);
+
         $riwayatPendidikans = $pegawai->riwayatPendidikan()
             ->latest('tahun_lulus')
             ->paginate(10);
@@ -28,6 +31,8 @@ class RiwayatPendidikanController extends Controller
      */
     public function create(Pegawai $pegawai)
     {
+        Gate::authorize('create', Pegawai::class);
+
         return view('riwayat-pendidikan.create', compact('pegawai'));
     }
 
@@ -36,6 +41,8 @@ class RiwayatPendidikanController extends Controller
      */
     public function store(Request $request, Pegawai $pegawai)
     {
+        Gate::authorize('create', Pegawai::class);
+
         $validated = $request->validate(
             [
                 'jenjang' => 'required|in:SMA,D3,S1,S2,S3',
@@ -78,6 +85,12 @@ class RiwayatPendidikanController extends Controller
      */
     public function edit(Pegawai $pegawai, RiwayatPendidikan $riwayatPendidikan)
     {
+        if ($riwayatPendidikan->pegawai_id !== $pegawai->id) {
+            abort(404);
+        }
+
+        Gate::authorize('update', $pegawai);
+
         return view('riwayat-pendidikan.edit', compact(
             'pegawai',
             'riwayatPendidikan'
@@ -89,6 +102,12 @@ class RiwayatPendidikanController extends Controller
      */
     public function update(Request $request, Pegawai $pegawai, RiwayatPendidikan $riwayatPendidikan)
     {
+        if ($riwayatPendidikan->pegawai_id !== $pegawai->id) {
+            abort(404);
+        }
+
+        Gate::authorize('update', $pegawai);
+
         $validated = $request->validate(
             [
                 'jenjang' => 'required|in:SMA,D3,S1,S2,S3',
@@ -126,6 +145,8 @@ class RiwayatPendidikanController extends Controller
         if ($riwayatPendidikan->pegawai_id !== $pegawai->id) {
             abort(404);
         }
+
+        Gate::authorize('delete', $pegawai);
 
         $riwayatPendidikan->delete();
 
