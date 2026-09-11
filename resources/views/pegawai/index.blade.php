@@ -7,9 +7,11 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Data Pegawai</h1>
 
-            <a href="{{ route('pegawai.create') }}" class="btn btn-primary">
-                <i class="fas fa-plus"></i> Tambah Pegawai
-            </a>
+            @can('create', App\Models\Pegawai::class)
+                <a href="{{ route('pegawai.create') }}" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Tambah Pegawai
+                </a>
+            @endcan
         </div>
 
         {{-- Pesan sukses --}}
@@ -92,22 +94,26 @@
                                             <i class="fas fa-eye"></i>
                                         </a>
 
-                                        <a href="{{ route('pegawai.edit', $pegawai->id) }}" class="btn btn-warning btn-sm">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
+                                        @can('update', $pegawai)
+                                            <a href="{{ route('pegawai.edit', $pegawai->id) }}" class="btn btn-warning btn-sm">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        @endcan
 
-                                        <form action="{{ route('pegawai.destroy', $pegawai->id) }}" method="POST"
-                                            class="d-inline">
+                                        @can('delete', $pegawai)
+                                            <form action="{{ route('pegawai.destroy', $pegawai->id) }}" method="POST"
+                                                class="d-inline">
 
-                                            @csrf
-                                            @method('DELETE')
+                                                @csrf
+                                                @method('DELETE')
 
-                                            <button type="submit" class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Apakah Anda yakin ingin menghapus data pegawai ini?')">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
+                                                <button type="submit" class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus data pegawai ini?')">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
 
-                                        </form>
+                                            </form>
+                                        @endcan
 
                                     </td>
                                 </tr>

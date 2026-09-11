@@ -35,7 +35,7 @@ Route::resource('jabatan', JabatanController::class)
     ->middleware(['auth', 'admin']);
 
 Route::resource('pegawai', PegawaiController::class)
-    ->middleware(['auth', 'admin']);
+    ->middleware(['auth']);
 
 Route::resource('pegawai.riwayat-pendidikan', RiwayatPendidikanController::class)
     ->middleware(['auth', 'admin']);

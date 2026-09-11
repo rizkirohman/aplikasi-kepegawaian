@@ -6,6 +6,7 @@ use App\Models\Pegawai;
 use App\Models\UnitKerja;
 use App\Models\Jabatan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class PegawaiController extends Controller
@@ -15,9 +16,14 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        $pegawais = Pegawai::with(['unitKerja', 'jabatan'])
-            ->latest()
-            ->paginate(5);
+        $query = Pegawai::with(['unitKerja', 'jabatan'])
+            ->latest();
+
+        if (auth()->user()->isPegawai()) {
+            $query->where('user_id', auth()->id());
+        }
+
+        $pegawais = $query->paginate(5);
 
         return view('pegawai.index', compact('pegawais'));
     }
@@ -27,6 +33,8 @@ class PegawaiController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Pegawai::class);
+
         $unitKerjas = UnitKerja::orderBy('nama_unit_kerja')->get();
         $jabatans = Jabatan::orderBy('nama_jabatan')->get();
 
@@ -38,6 +46,8 @@ class PegawaiController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Pegawai::class);
+
         $validated = $request->validate(
             [
                 'nip' => 'required|string|max:50|unique:pegawais,nip',
@@ -103,6 +113,8 @@ class PegawaiController extends Controller
      */
     public function show(Pegawai $pegawai)
     {
+        Gate::authorize('view', $pegawai);
+
         $pegawai->load([
             'unitKerja',
             'jabatan',
@@ -120,6 +132,8 @@ class PegawaiController extends Controller
      */
     public function edit(Pegawai $pegawai)
     {
+        Gate::authorize('update', $pegawai);
+
         $unitKerjas = UnitKerja::orderBy('nama_unit_kerja')->get();
         $jabatans = Jabatan::orderBy('nama_jabatan')->get();
 
@@ -135,6 +149,8 @@ class PegawaiController extends Controller
      */
     public function update(Request $request, Pegawai $pegawai)
     {
+        Gate::authorize('update', $pegawai);
+
         $validated = $request->validate(
             [
                 'nip' => 'required|string|max:50|unique:pegawais,nip,' . $pegawai->id,
@@ -209,6 +225,8 @@ class PegawaiController extends Controller
      */
     public function destroy(Pegawai $pegawai)
     {
+        Gate::authorize('delete', $pegawai);
+
         // Hapus foto jika pegawai memiliki foto
         if ($pegawai->foto) {
             Storage::disk('public')->delete($pegawai->foto);
