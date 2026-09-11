@@ -4,11 +4,12 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DokumenPegawaiController;
 use App\Http\Controllers\JabatanController;
-use App\Http\Controllers\UnitKerjaController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\RiwayatJabatanController;
 use App\Http\Controllers\RiwayatPangkatController;
 use App\Http\Controllers\RiwayatPendidikanController;
+use App\Http\Controllers\UnitKerjaController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AuthController::class, 'showLogin'])
@@ -32,6 +33,9 @@ Route::resource('unit-kerja', UnitKerjaController::class)
     ->middleware(['auth', 'admin']);;
 
 Route::resource('jabatan', JabatanController::class)
+    ->middleware(['auth', 'admin']);
+
+Route::resource('user', UserController::class)
     ->middleware(['auth', 'admin']);
 
 Route::resource('pegawai', PegawaiController::class)

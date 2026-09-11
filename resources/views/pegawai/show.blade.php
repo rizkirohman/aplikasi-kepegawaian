@@ -11,9 +11,11 @@
             </h1>
 
             <div>
-                <a href="{{ route('pegawai.edit', $pegawai->id) }}" class="btn btn-warning">
-                    <i class="fas fa-edit"></i> Edit
-                </a>
+                @can('update', $pegawai)
+                    <a href="{{ route('pegawai.edit', $pegawai->id) }}" class="btn btn-warning">
+                        <i class="fas fa-edit"></i> Edit
+                    </a>
+                @endcan
 
                 <a href="{{ route('pegawai.index') }}" class="btn btn-secondary">
                     <i class="fas fa-arrow-left"></i> Kembali

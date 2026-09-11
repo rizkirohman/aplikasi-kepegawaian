@@ -16,7 +16,7 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Dashboard -->
-    <li class="nav-item">
+    <li class="nav-item {{ request()->Is('/') ? 'active' : '' }}">
         <a class="nav-link" href="{{ url('/') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
@@ -72,8 +72,8 @@
         Sistem
     </div>
 
-    <li class="nav-item">
-        <a class="nav-link" href="#">
+    <li class="nav-item {{ request()->routeIs('user.*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('user.index') }}">
             <i class="fas fa-fw fa-user-cog"></i>
             <span>User</span>
         </a>
