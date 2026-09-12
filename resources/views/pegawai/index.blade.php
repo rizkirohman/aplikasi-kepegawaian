@@ -50,7 +50,7 @@
                                 <th>NIP</th>
                                 <th>Jenis Pegawai</th>
                                 <th>Unit Kerja</th>
-                                <th>Jabatan</th>
+                                {{-- <th>Jabatan</th> --}}
                                 <th>Status</th>
                                 <th width="15%">Aksi</th>
                             </tr>
@@ -80,9 +80,9 @@
                                         {{ $pegawai->unitKerja->nama_unit_kerja ?? '-' }}
                                     </td>
 
-                                    <td>
+                                    {{-- <td>
                                         {{ $pegawai->jabatan->nama_jabatan ?? '-' }}
-                                    </td>
+                                    </td> --}}
 
                                     <td>
                                         {{ $pegawai->status_kepegawaian ?? '-' }}

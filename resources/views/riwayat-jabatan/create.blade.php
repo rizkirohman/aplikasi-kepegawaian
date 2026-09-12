@@ -70,7 +70,7 @@
 
                         <input type="text" name="jabatan" id="jabatan"
                             class="form-control @error('jabatan') is-invalid @enderror" value="{{ old('jabatan') }}"
-                            placeholder="isi dengan jabatan struktural atau fungsional..">
+                            placeholder="Contoh: Dekan, Lektor, Pengelola SDM">
 
                         @error('jabatan')
                             <div class="invalid-feedback">
