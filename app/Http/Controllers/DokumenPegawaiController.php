@@ -168,7 +168,7 @@ class DokumenPegawaiController extends Controller
             ->with('success', 'Dokumen kepegawaian berhasil dihapus.');
     }
 
-        /**
+    /**
      * 
      * Download dokumen.
      */
@@ -187,5 +187,29 @@ class DokumenPegawaiController extends Controller
         return Storage::disk('public')->download(
             $dokumen->file
         );
+    }
+
+    /**
+     * 
+     * Untuk sidebar.
+     */
+    public function all()
+    {
+        $user = auth()->user();
+
+        if ($user->isPegawai()) {
+            $dokumens = DokumenPegawai::with('pegawai')
+                ->whereHas('pegawai', function ($query) use ($user) {
+                    $query->where('user_id', $user->id);
+                })
+                ->latest()
+                ->get();
+        } else {
+            $dokumens = DokumenPegawai::with('pegawai')
+                ->latest()
+                ->get();
+        }
+
+        return view('dokumen-pegawai.all', compact('dokumens'));
     }
 }

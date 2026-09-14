@@ -37,19 +37,19 @@
         </a>
     </li>
 
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link" href="#">
             <i class="fas fa-fw fa-history"></i>
             <span>Riwayat Pegawai</span>
         </a>
-    </li>
+    </li> --}}
 
-    <li class="nav-item">
-        <a class="nav-link" href="#">
+    {{-- <li class="nav-item {{ request()->routeIs('dokumen-pegawai.all') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('dokumen-pegawai.all') }}">
             <i class="fas fa-fw fa-folder"></i>
             <span>Dokumen Pegawai</span>
         </a>
-    </li>
+    </li> --}}
 
     <hr class="sidebar-divider">
 
