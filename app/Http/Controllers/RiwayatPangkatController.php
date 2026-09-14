@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pegawai;
 use App\Models\RiwayatPangkat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class RiwayatPangkatController extends Controller
@@ -14,9 +15,11 @@ class RiwayatPangkatController extends Controller
      */
     public function index(Pegawai $pegawai)
     {
+        Gate::authorize('view', $pegawai);
+        
         $riwayatPangkats = $pegawai->riwayatPangkat()
             ->latest('tmt')
-            ->get();
+            ->paginate(5);
 
         return view('riwayat-pangkat.index', compact(
             'pegawai',
@@ -29,11 +32,15 @@ class RiwayatPangkatController extends Controller
      */
     public function create(Pegawai $pegawai)
     {
+        Gate::authorize('create', Pegawai::class);
+
         return view('riwayat-pangkat.create', compact('pegawai'));
     }
 
     public function store(Request $request, Pegawai $pegawai)
     {
+        Gate::authorize('create', Pegawai::class);
+        
         $validated = $request->validate(
             [
                 'pangkat' => 'required|string|max:255',
@@ -68,6 +75,12 @@ class RiwayatPangkatController extends Controller
 
     public function edit(Pegawai $pegawai, RiwayatPangkat $riwayatPangkat)
     {
+        if ($riwayatPangkat->pegawai_id !== $pegawai->id) {
+            abort(404);
+        }
+        
+        Gate::authorize('update', $pegawai);
+        
         return view('riwayat-pangkat.edit', compact(
             'pegawai',
             'riwayatPangkat'
@@ -79,6 +92,8 @@ class RiwayatPangkatController extends Controller
         if ($riwayatPangkat->pegawai_id !== $pegawai->id) {
             abort(404);
         }
+
+        Gate::authorize('update', $pegawai);
 
         $validated = $request->validate(
             [
@@ -124,6 +139,8 @@ class RiwayatPangkatController extends Controller
         if ($riwayatPangkat->pegawai_id !== $pegawai->id) {
             abort(404);
         }
+
+        Gate::authorize('delete', $pegawai);
 
         if ($riwayatPangkat->dokumen_sk) {
             Storage::disk('public')->delete($riwayatPangkat->dokumen_sk);

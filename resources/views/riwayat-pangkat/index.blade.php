@@ -26,10 +26,12 @@
                     Kembali ke Detail
                 </a>
 
-                <a href="{{ route('pegawai.riwayat-pangkat.create', $pegawai->id) }}" class="btn btn-primary">
-                    <i class="fas fa-plus"></i>
-                    Tambah Pangkat
-                </a>
+                @can('create', App\Models\Pegawai::class)
+                    <a href="{{ route('pegawai.riwayat-pangkat.create', $pegawai->id) }}" class="btn btn-primary">
+                        <i class="fas fa-plus"></i>
+                        Tambah Pangkat
+                    </a>
+                @endcan
 
             </div>
 
@@ -190,23 +192,27 @@
 
                                         <td>
 
-                                            <a href="{{ route('pegawai.riwayat-pangkat.edit', [$pegawai->id, $riwayat->id]) }}"
-                                                class="btn btn-warning btn-sm" title="Edit">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
+                                            @can('update', $pegawai)
+                                                <a href="{{ route('pegawai.riwayat-pangkat.edit', [$pegawai->id, $riwayat->id]) }}"
+                                                    class="btn btn-warning btn-sm" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                            @endcan
 
-                                            <form
-                                                action="{{ route('pegawai.riwayat-pangkat.destroy', [$pegawai->id, $riwayat->id]) }}"
-                                                method="POST" class="d-inline"
-                                                onsubmit="return confirm('Apakah Anda yakin ingin menghapus riwayat pangkat ini?')">
+                                            @can('delete', $pegawai)
+                                                <form
+                                                    action="{{ route('pegawai.riwayat-pangkat.destroy', [$pegawai->id, $riwayat->id]) }}"
+                                                    method="POST" class="d-inline"
+                                                    onsubmit="return confirm('Apakah Anda yakin ingin menghapus riwayat pangkat ini?')">
 
-                                                @csrf
-                                                @method('DELETE')
+                                                    @csrf
+                                                    @method('DELETE')
 
-                                                <button type="submit" class="btn btn-danger btn-sm">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
+                                                    <button type="submit" class="btn btn-danger btn-sm">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            @endcan
 
                                         </td>
 
