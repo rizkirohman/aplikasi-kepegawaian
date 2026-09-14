@@ -14,13 +14,25 @@ class PegawaiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $query = Pegawai::with(['unitKerja', 'jabatan'])
             ->latest();
 
+        // Pegawai hanya melihat data miliknya sendiri
         if (auth()->user()->isPegawai()) {
             $query->where('user_id', auth()->id());
+        }
+
+        // Pencarian
+        if ($request->filled('search')) {
+            $search = $request->search;
+
+            $query->where(function ($query) use ($search) {
+                $query->where('nama_lengkap', 'like', '%' . $search . '%')
+                    ->orWhere('nip', 'like', '%' . $search . '%')
+                    ->orWhere('nidn_nidk', 'like', '%' . $search . '%');
+            });
         }
 
         $pegawais = $query->paginate(5);

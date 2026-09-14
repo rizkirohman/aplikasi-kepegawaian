@@ -31,10 +31,29 @@
         {{-- Card --}}
         <div class="card shadow mb-4">
 
-            <div class="card-header py-3">
+            <div class="card-header py-3 d-flex justify-content-between align-items-center">
+
                 <h6 class="m-0 font-weight-bold text-primary">
                     Daftar Pegawai
                 </h6>
+
+                <form action="{{ route('pegawai.index') }}" method="GET" class="d-flex">
+
+                    <input type="text" name="search" class="form-control mr-2"
+                        placeholder="Cari nama, NIP, NIDN/NIDK..." value="{{ request('search') }}">
+
+                    <button type="submit" class="btn btn-primary mr-1">
+                        <i class="fas fa-search"></i>
+                    </button>
+
+                    @if (request('search'))
+                        <a href="{{ route('pegawai.index') }}" class="btn btn-secondary ms-2">
+                            <i class="fas fa-sync-alt"></i>
+                        </a>
+                    @endif
+
+                </form>
+
             </div>
 
             <div class="card-body">
