@@ -30,12 +30,14 @@
 
                 </a>
 
-                <a href="{{ route('pegawai.dokumen.create', $pegawai->id) }}" class="btn btn-primary">
+                @can('create', App\Models\Pegawai::class)
+                    <a href="{{ route('pegawai.dokumen.create', $pegawai->id) }}" class="btn btn-primary">
 
-                    <i class="fas fa-plus"></i>
-                    Tambah Dokumen
+                        <i class="fas fa-plus"></i>
+                        Tambah Dokumen
 
-                </a>
+                    </a>
+                @endcan
 
             </div>
 
@@ -175,12 +177,14 @@
 
                                                 </a>
 
-                                                <a href="{{ route('pegawai.dokumen.download', [$pegawai->id, $dokumen->id]) }}"
-                                                    class="btn btn-primary btn-sm" title="Download Dokumen">
+                                                @can('view', $pegawai)
+                                                    <a href="{{ route('pegawai.dokumen.download', [$pegawai->id, $dokumen->id]) }}"
+                                                        class="btn btn-primary btn-sm" title="Download Dokumen">
 
-                                                    <i class="fas fa-download"></i>
+                                                        <i class="fas fa-download"></i>
 
-                                                </a>
+                                                    </a>
+                                                @endcan
                                             @else
                                                 <span class="text-muted">
                                                     -
@@ -191,28 +195,32 @@
 
                                         <td>
 
-                                            <a href="{{ route('pegawai.dokumen.edit', [$pegawai->id, $dokumen->id]) }}"
-                                                class="btn btn-warning btn-sm" title="Edit">
+                                            @can('update', $pegawai)
+                                                <a href="{{ route('pegawai.dokumen.edit', [$pegawai->id, $dokumen->id]) }}"
+                                                    class="btn btn-warning btn-sm" title="Edit">
 
-                                                <i class="fas fa-edit"></i>
+                                                    <i class="fas fa-edit"></i>
 
-                                            </a>
+                                                </a>
+                                            @endcan
 
-                                            <form
-                                                action="{{ route('pegawai.dokumen.destroy', [$pegawai->id, $dokumen->id]) }}"
-                                                method="POST" class="d-inline"
-                                                onsubmit="return confirm('Apakah Anda yakin ingin menghapus dokumen ini?')">
+                                            @can('delete', $pegawai)
+                                                <form
+                                                    action="{{ route('pegawai.dokumen.destroy', [$pegawai->id, $dokumen->id]) }}"
+                                                    method="POST" class="d-inline"
+                                                    onsubmit="return confirm('Apakah Anda yakin ingin menghapus dokumen ini?')">
 
-                                                @csrf
-                                                @method('DELETE')
+                                                    @csrf
+                                                    @method('DELETE')
 
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Hapus">
+                                                    <button type="submit" class="btn btn-danger btn-sm" title="Hapus">
 
-                                                    <i class="fas fa-trash"></i>
+                                                        <i class="fas fa-trash"></i>
 
-                                                </button>
+                                                    </button>
 
-                                            </form>
+                                                </form>
+                                            @endcan
 
                                         </td>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DokumenPegawai;
 use App\Models\Pegawai;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class DokumenPegawaiController extends Controller
@@ -14,6 +15,8 @@ class DokumenPegawaiController extends Controller
      */
     public function index(Pegawai $pegawai)
     {
+        Gate::authorize('view', $pegawai);
+        
         $dokumens = $pegawai->dokumen()
             ->latest()
             ->get();
@@ -29,6 +32,8 @@ class DokumenPegawaiController extends Controller
      */
     public function create(Pegawai $pegawai)
     {
+        Gate::authorize('create', Pegawai::class);
+
         $pegawais = Pegawai::orderBy('nama_lengkap')->get();
 
         return view('dokumen-pegawai.create', compact(
@@ -42,6 +47,8 @@ class DokumenPegawaiController extends Controller
      */
     public function store(Request $request, Pegawai $pegawai)
     {
+        Gate::authorize('create', Pegawai::class);
+
         $validated = $request->validate([
             'pegawai_id' => 'required|exists:pegawais,id',
             'nama_dokumen' => 'required|string|max:255',
@@ -64,25 +71,6 @@ class DokumenPegawaiController extends Controller
     }
 
     /**
-     * 
-     * Download dokumen.
-     */
-    public function download(Pegawai $pegawai,DokumenPegawai $dokumen) 
-    {
-        if ($dokumen->pegawai_id !== $pegawai->id) {
-            abort(404);
-        }
-
-        if (!Storage::disk('public')->exists($dokumen->file)) {
-            abort(404, 'File dokumen tidak ditemukan.');
-        }
-
-        return Storage::disk('public')->download(
-            $dokumen->file
-        );
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(string $id)
@@ -99,6 +87,8 @@ class DokumenPegawaiController extends Controller
         if ($dokumen->pegawai_id !== $pegawai->id) {
             abort(404);
         }
+
+        Gate::authorize('update', $pegawai);
 
         $pegawais = Pegawai::orderBy('nama_lengkap')->get();
 
@@ -118,6 +108,8 @@ class DokumenPegawaiController extends Controller
         if ($dokumen->pegawai_id !== $pegawai->id) {
             abort(404);
         }
+
+        Gate::authorize('update', $pegawai);
 
         $validated = $request->validate([
             'pegawai_id' => 'required|exists:pegawais,id',
@@ -161,6 +153,8 @@ class DokumenPegawaiController extends Controller
             abort(404);
         }
 
+        Gate::authorize('delete', $pegawai);
+
         // Hapus file dari storage
         if ($dokumen->file) {
             Storage::disk('public')->delete($dokumen->file);
@@ -172,5 +166,26 @@ class DokumenPegawaiController extends Controller
         return redirect()
             ->route('pegawai.dokumen.index', $pegawai->id)
             ->with('success', 'Dokumen kepegawaian berhasil dihapus.');
+    }
+
+        /**
+     * 
+     * Download dokumen.
+     */
+    public function download(Pegawai $pegawai,DokumenPegawai $dokumen) 
+    {
+        if ($dokumen->pegawai_id !== $pegawai->id) {
+            abort(404);
+        }
+
+        Gate::authorize('view', $pegawai);
+
+        if (!Storage::disk('public')->exists($dokumen->file)) {
+            abort(404, 'File dokumen tidak ditemukan.');
+        }
+
+        return Storage::disk('public')->download(
+            $dokumen->file
+        );
     }
 }
