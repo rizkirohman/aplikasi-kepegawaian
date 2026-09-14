@@ -16,9 +16,9 @@
             </div>
 
             @can('create', App\Models\Pegawai::class)
-                <a href="{{ route('pegawai.riwayat-pangkat.create', $pegawai->id) }}" class="btn btn-primary">
+                <a href="{{ route('pegawai.riwayat-jabatan.create', $pegawai->id) }}" class="btn btn-primary">
                     <i class="fas fa-plus"></i>
-                    Tambah Riwayat Pangkat
+                    Tambah Riwayat Jabatan
                 </a>
             @endcan
         </div>

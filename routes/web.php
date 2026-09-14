@@ -49,7 +49,7 @@ Route::resource('pegawai.riwayat-pangkat', RiwayatPangkatController::class)
     ->except(['show']);
 
 Route::resource('pegawai.riwayat-jabatan', RiwayatJabatanController::class)
-    ->middleware(['auth', 'admin']);
+    ->middleware(['auth',]);
 
 Route::resource('pegawai.dokumen', DokumenPegawaiController::class)
     ->parameters(['dokumen' => 'dokumen',])

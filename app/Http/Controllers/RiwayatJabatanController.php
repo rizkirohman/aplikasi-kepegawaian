@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Pegawai;
 use App\Models\RiwayatJabatan;
+// use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class RiwayatJabatanController extends Controller
@@ -14,9 +16,11 @@ class RiwayatJabatanController extends Controller
      */
     public function index(Pegawai $pegawai)
     {
+        Gate::authorize('view', $pegawai);
+
         $riwayatJabatans = $pegawai->riwayatJabatan()
             ->latest('tmt')
-            ->get();
+            ->paginate(5);
 
         return view('riwayat-jabatan.index', compact(
             'pegawai',
@@ -29,6 +33,8 @@ class RiwayatJabatanController extends Controller
      */
     public function create(Pegawai $pegawai)
     {
+        Gate::authorize('create', Pegawai::class);
+
         return view('riwayat-jabatan.create', compact('pegawai'));
     }
 
@@ -37,6 +43,8 @@ class RiwayatJabatanController extends Controller
      */
     public function store(Request $request, Pegawai $pegawai)
     {
+        Gate::authorize('create', Pegawai::class);
+
         $validated = $request->validate([
             'jabatan' => 'required|string|max:255',
             'unit_kerja' => 'nullable|string|max:255',
@@ -76,6 +84,8 @@ class RiwayatJabatanController extends Controller
             abort(404);
         }
 
+        Gate::authorize('update', $pegawai);
+
         return view('riwayat-jabatan.edit', compact(
             'pegawai',
             'riwayatJabatan',
@@ -91,6 +101,8 @@ class RiwayatJabatanController extends Controller
         if ($riwayatJabatan->pegawai_id !== $pegawai->id) {
             abort(404);
         }
+
+        Gate::authorize('update', $pegawai);
 
         $validated = $request->validate([
             'jabatan' => 'required|string|max:255',
@@ -131,6 +143,8 @@ class RiwayatJabatanController extends Controller
         if ($riwayatJabatan->pegawai_id !== $pegawai->id) {
             abort(404);
         }
+
+        Gate::authorize('delete', $pegawai);
 
         // Hapus file dokumen jika ada
         if ($riwayatJabatan->dokumen_sk) {
