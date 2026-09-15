@@ -49,6 +49,7 @@ return new class extends Migration
                 'Tenaga Kependidikan'
             ]);
 
+            // PNS, PPPK, PT, PTT, dll
             $table->string('status_kepegawaian')->nullable();
             $table->date('tmt')->nullable();
 

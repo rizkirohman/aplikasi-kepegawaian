@@ -2,12 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Pegawai;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboard');
+        $totalPegawai = Pegawai::count();
+
+        $totalDosen = Pegawai::where('jenis_pegawai', 'Dosen')->count();
+
+        $totalTendik = Pegawai::where('jenis_pegawai', 'Tenaga Kependidikan')->count();
+
+        return view('dashboard', compact(
+            'totalPegawai',
+            'totalDosen',
+            'totalTendik'
+        ));
     }
 }

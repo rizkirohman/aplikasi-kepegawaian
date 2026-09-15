@@ -28,6 +28,7 @@ class Pegawai extends Model
         'email',
         'jenis_pegawai',
         'status_kepegawaian',
+        'status_pegawai',
         'tmt',
         'unit_kerja_id',
         'jabatan_id',

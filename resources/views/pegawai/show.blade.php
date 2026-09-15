@@ -168,6 +168,11 @@
                             </div>
 
                             <div class="col-md-6 mb-3">
+                                <strong>Status Pegawai</strong>
+                                <div>{{ $pegawai->status_pegawai ?? '-' }}</div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
                                 <strong>TMT Kepegawaian</strong>
                                 <div>
                                     {{ $pegawai->tmt?->format('d-m-Y') ?? '-' }}

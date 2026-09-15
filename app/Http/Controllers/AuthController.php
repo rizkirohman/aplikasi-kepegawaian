@@ -22,6 +22,28 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
+
+            $user = Auth::user();
+
+            // Pastikan user memiliki data pegawai
+            if (!$user->pegawai) {
+                Auth::logout();
+
+                return back()->withErrors([
+                    'email' => 'Akun belum terhubung dengan data pegawai.',
+                ])->onlyInput('email');
+            }
+
+            // Hanya pegawai dengan status Aktif yang boleh login
+            if ($user->pegawai->status_pegawai !== 'Aktif') {
+                Auth::logout();
+
+                return back()->withErrors([
+                    'email' => 'Akun tidak dapat login karena status pegawai adalah '
+                        . $user->pegawai->status_pegawai . '.',
+                ])->onlyInput('email');
+            }
+
             $request->session()->regenerate();
 
             return redirect()->intended('/');

@@ -265,6 +265,25 @@
                                 value="{{ old('status_kepegawaian') }}" placeholder="Contoh: PNS, PPPK, Non-ASN">
                         </div>
 
+                        {{-- Status Pegawai --}}
+                        <div class="col-md-6 mb-3">
+                            <label for="status_pegawai">
+                                Status Pegawai
+                            </label>
+
+                            <select name="status_pegawai" id="status_pegawai" class="form-control" required>
+                                <option value="Aktif" {{ old('status_pegawai', 'Aktif') == 'Aktif' ? 'selected' : '' }}>
+                                    Aktif
+                                </option>
+                                <option value="Pensiun" {{ old('status_pegawai') == 'Pensiun' ? 'selected' : '' }}>
+                                    Pensiun
+                                </option>
+                                <option value="Nonaktif" {{ old('status_pegawai') == 'Nonaktif' ? 'selected' : '' }}>
+                                    Nonaktif
+                                </option>
+                            </select>
+                        </div>
+
                         {{-- TMT --}}
                         <div class="col-md-6 mb-3">
                             <label for="tmt">TMT Kepegawaian</label>

@@ -85,6 +85,7 @@ class PegawaiController extends Controller
 
                 'jenis_pegawai' => 'required|in:Dosen,Tenaga Kependidikan',
                 'status_kepegawaian' => 'nullable|string|max:100',
+                'status_pegawai' => 'required|in:Aktif,Pensiun,Nonaktif',
                 'tmt' => 'nullable|date',
 
                 'unit_kerja_id' => 'nullable|exists:unit_kerjas,id',
@@ -101,6 +102,8 @@ class PegawaiController extends Controller
                 'jenis_kelamin.required' => 'Jenis kelamin wajib dipilih.',
                 'tanggal_lahir.required' => 'Tanggal lahir wajib diisi.',
                 'jenis_pegawai.required' => 'Jenis pegawai wajib dipilih.',
+                'status_pegawai.required' => 'Status pegawai wajib dipilih.',
+                'status_pegawai.in' => 'Status pegawai tidak valid.',
 
                 'foto.image' => 'File foto harus berupa gambar.',
                 'foto.mimes' => 'Foto harus berformat JPG, JPEG, atau PNG.',
@@ -188,6 +191,7 @@ class PegawaiController extends Controller
 
                 'jenis_pegawai' => 'required|in:Dosen,Tenaga Kependidikan',
                 'status_kepegawaian' => 'nullable|string|max:100',
+                'status_pegawai' => 'required|in:Aktif,Pensiun,Nonaktif',
                 'tmt' => 'nullable|date',
 
                 'unit_kerja_id' => 'nullable|exists:unit_kerjas,id',
@@ -204,6 +208,8 @@ class PegawaiController extends Controller
                 'jenis_kelamin.required' => 'Jenis kelamin wajib dipilih.',
                 'tanggal_lahir.required' => 'Tanggal lahir wajib diisi.',
                 'jenis_pegawai.required' => 'Jenis pegawai wajib dipilih.',
+                'status_pegawai.required' => 'Status pegawai wajib dipilih.',
+                'status_pegawai.in' => 'Status pegawai tidak valid.',
 
                 'foto.image' => 'File foto harus berupa gambar.',
                 'foto.mimes' => 'Foto harus berformat JPG, JPEG, atau PNG.',

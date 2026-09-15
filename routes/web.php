@@ -22,43 +22,43 @@ Route::post('/logout', [AuthController::class, 'logout'])
     ->name('logout');
 
 Route::get('/', [DashboardController::class, 'index'])
-    ->middleware('auth')
+    ->middleware('auth', 'status.pegawai')
     ->name('dashboard');
 
 Route::get('/admin-test', function () {
     return 'Halaman khusus Admin Kepegawaian';
-})->middleware(['auth', 'admin']);
+})->middleware(['auth', 'status.pegawai', 'admin']);
 
 Route::resource('unit-kerja', UnitKerjaController::class)
-    ->middleware(['auth', 'admin']);;
+    ->middleware(['auth', 'status.pegawai', 'admin']);;
 
 Route::resource('jabatan', JabatanController::class)
-    ->middleware(['auth', 'admin']);
+    ->middleware(['auth', 'status.pegawai', 'admin']);
 
 Route::resource('user', UserController::class)
-    ->middleware(['auth', 'admin']);
+    ->middleware(['auth', 'status.pegawai', 'admin']);
 
 Route::resource('pegawai', PegawaiController::class)
-    ->middleware(['auth']);
+    ->middleware(['auth', 'status.pegawai']);
 
 Route::resource('pegawai.riwayat-pendidikan', RiwayatPendidikanController::class)
-    ->middleware(['auth']);
+    ->middleware(['auth', 'status.pegawai']);
 
 Route::resource('pegawai.riwayat-pangkat', RiwayatPangkatController::class)
-    ->middleware(['auth',])
+    ->middleware(['auth', 'status.pegawai'])
     ->except(['show']);
 
 Route::resource('pegawai.riwayat-jabatan', RiwayatJabatanController::class)
-    ->middleware(['auth']);
+    ->middleware(['auth', 'status.pegawai']);
 
 Route::resource('pegawai.dokumen', DokumenPegawaiController::class)
     ->parameters(['dokumen' => 'dokumen',])
-    ->middleware(['auth'])
+    ->middleware(['auth', 'status.pegawai'])
     ->except(['show']);
 
 Route::get('pegawai/{pegawai}/dokumen/{dokumen}/download', [DokumenPegawaiController::class, 'download'])
     ->name('pegawai.dokumen.download')
-    ->middleware(['auth']);
+    ->middleware(['auth', 'status.pegawai']);
 
 // Dokumen Pegawai di Sidebar
 // Route::get('/dokumen-pegawai', [DokumenPegawaiController::class, 'all'])
