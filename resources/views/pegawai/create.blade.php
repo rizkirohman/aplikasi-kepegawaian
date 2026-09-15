@@ -136,6 +136,10 @@
 
                                 <option value="">-- Pilih Status --</option>
 
+                                <option value="Lajang" {{ old('status_perkawinan') == 'Lajang' ? 'selected' : '' }}>
+                                    Lajang
+                                </option>
+
                                 <option value="Menikah" {{ old('status_perkawinan') == 'Menikah' ? 'selected' : '' }}>
                                     Menikah
                                 </option>

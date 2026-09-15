@@ -61,6 +61,6 @@ Route::get('pegawai/{pegawai}/dokumen/{dokumen}/download', [DokumenPegawaiContro
     ->middleware(['auth']);
 
 // Dokumen Pegawai di Sidebar
-Route::get('/dokumen-pegawai', [DokumenPegawaiController::class, 'all'])
-    ->name('dokumen-pegawai.all')
-    ->middleware(['auth']);
+// Route::get('/dokumen-pegawai', [DokumenPegawaiController::class, 'all'])
+//     ->name('dokumen-pegawai.all')
+//     ->middleware(['auth']);

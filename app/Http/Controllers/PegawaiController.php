@@ -35,7 +35,12 @@ class PegawaiController extends Controller
             });
         }
 
-        $pegawais = $query->paginate(5);
+        // Filter jenis pegawai
+        if ($request->filled('jenis_pegawai')) {
+            $query->where('jenis_pegawai', $request->jenis_pegawai);
+        }
+
+        $pegawais = $query->paginate(5)->withQueryString();
 
         return view('pegawai.index', compact('pegawais'));
     }

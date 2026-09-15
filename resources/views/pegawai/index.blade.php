@@ -37,22 +37,39 @@
                     Daftar Pegawai
                 </h6>
 
-                <form action="{{ route('pegawai.index') }}" method="GET" class="d-flex">
+                @can('create', App\Models\Pegawai::class)
+                    <form action="{{ route('pegawai.index') }}" method="GET" class="d-flex">
 
-                    <input type="text" name="search" class="form-control mr-2"
-                        placeholder="Cari nama, NIP, NIDN/NIDK..." value="{{ request('search') }}">
+                        <input type="text" name="search" class="form-control mr-1"
+                            placeholder="Cari nama, NIP, NIDN/NIDK..." value="{{ request('search') }}">
 
-                    <button type="submit" class="btn btn-primary mr-1">
-                        <i class="fas fa-search"></i>
-                    </button>
+                        <select name="jenis_pegawai" class="form-control mr-1">
 
-                    @if (request('search'))
-                        <a href="{{ route('pegawai.index') }}" class="btn btn-secondary ms-2">
-                            <i class="fas fa-sync-alt"></i>
-                        </a>
-                    @endif
+                            <option value="">Semua Jenis</option>
 
-                </form>
+                            <option value="Dosen" {{ request('jenis_pegawai') == 'Dosen' ? 'selected' : '' }}>
+                                Dosen
+                            </option>
+
+                            <option value="Tenaga Kependidikan"
+                                {{ request('jenis_pegawai') == 'Tenaga Kependidikan' ? 'selected' : '' }}>
+                                Tenaga Kependidikan
+                            </option>
+
+                        </select>
+
+                        <button type="submit" class="btn btn-primary mr-1">
+                            <i class="fas fa-search"></i>
+                        </button>
+
+                        @if (request('search') || request('jenis_pegawai'))
+                            <a href="{{ route('pegawai.index') }}" class="btn btn-secondary ms-2">
+                                <i class="fas fa-sync-alt"></i>
+                            </a>
+                        @endif
+
+                    </form>
+                @endcan
 
             </div>
 
