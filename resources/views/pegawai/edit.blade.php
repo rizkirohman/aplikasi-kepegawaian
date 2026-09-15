@@ -120,9 +120,15 @@
                         <div class="col-md-6 mb-3">
                             <label for="status_perkawinan">Status Perkawinan</label>
 
-                            <select name="status_perkawinan" id="status_perkawinan" class="form-control">
+                            <select name="status_perkawinan" id="status_perkawinan"
+                                class="form-control @error('status_perkawinan') is-invalid @enderror">
 
                                 <option value="">-- Pilih Status --</option>
+
+                                <option value="Lajang"
+                                    {{ old('status_perkawinan', $pegawai->status_perkawinan) == 'Lajang' ? 'selected' : '' }}>
+                                    Lajang
+                                </option>
 
                                 <option value="Menikah"
                                     {{ old('status_perkawinan', $pegawai->status_perkawinan) == 'Menikah' ? 'selected' : '' }}>
@@ -135,6 +141,12 @@
                                 </option>
 
                             </select>
+
+                            @error('status_perkawinan')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
 
                         <div class="col-md-6 mb-3">

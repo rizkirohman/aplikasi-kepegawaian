@@ -77,7 +77,7 @@ class PegawaiController extends Controller
                 'tempat_lahir' => 'nullable|string|max:100',
                 'tanggal_lahir' => 'required|date',
 
-                'status_perkawinan' => 'nullable|in:Menikah,Bercerai',
+                'status_perkawinan' => 'nullable|in:Lajang,Menikah,Bercerai',
 
                 'alamat' => 'nullable|string',
                 'no_hp' => 'nullable|string|max:20',
@@ -183,7 +183,7 @@ class PegawaiController extends Controller
                 'tempat_lahir' => 'nullable|string|max:100',
                 'tanggal_lahir' => 'required|date',
 
-                'status_perkawinan' => 'nullable|in:Menikah,Bercerai',
+                'status_perkawinan' => 'nullable|in:Lajang,Menikah,Bercerai',
 
                 'alamat' => 'nullable|string',
                 'no_hp' => 'nullable|string|max:20',
