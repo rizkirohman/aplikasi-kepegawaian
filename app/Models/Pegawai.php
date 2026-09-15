@@ -75,4 +75,40 @@ class Pegawai extends Model
     {
         return $this->hasMany(DokumenPegawai::class);
     }
+
+    public function getBupAttribute(): ?int
+    {
+        if ($this->jenis_pegawai === 'Tenaga Kependidikan') {
+            return 58;
+        }
+
+        if (
+            $this->jenis_pegawai === 'Dosen' &&
+            $this->jabatan_fungsional === 'Profesor'
+        ) {
+            return 70;
+        }
+
+        if (
+            $this->jenis_pegawai === 'Dosen' &&
+            in_array($this->pendidikan_terakhir, ['S2', 'S3'])
+        ) {
+            return 65;
+        }
+
+        return null;
+    }
+
+    public function getTanggalPensiunAttribute()
+    {
+        if (!$this->tanggal_lahir || !$this->bup) {
+            return null;
+        }
+
+        return $this->tanggal_lahir
+            ->copy()
+            ->addYears($this->bup)
+            ->startOfMonth()
+            ->addMonth();
+    }
 }
