@@ -46,6 +46,43 @@
             border-radius: 6px;
             font-size: 0.95rem;
         }
+
+        /* Menyatukan border input password dan tombol eye */
+        .input-password-custom {
+            border-right: none;
+        }
+
+        .btn-show-pass {
+            border: 1px solid #d1d3e2;
+            /* Menyamakan warna border default SB Admin 2 */
+            border-left: none;
+            background-color: #fff;
+            color: #858796;
+            border-top-right-radius: 6px;
+            border-bottom-right-radius: 6px;
+        }
+
+        .btn-show-pass:hover {
+            background-color: #fff;
+            color: #4e73df;
+            /* Ikon menjadi biru saat di-hover */
+        }
+
+        .btn-show-pass:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        /* Membuat border menyala bersamaan saat input password sedang fokus (diklik) */
+        .input-group:focus-within .input-password-custom,
+        .input-group:focus-within .btn-show-pass {
+            border-color: #bac8f3;
+        }
+
+        .input-group:focus-within {
+            box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+            border-radius: 6px;
+        }
     </style>
 </head>
 
@@ -89,9 +126,17 @@
 
                             <div class="form-group mb-4">
                                 <label class="small text-gray-700 font-weight-bold mb-1" for="password">Password</label>
-                                <input type="password" id="password" name="password"
-                                    class="form-control form-control-custom" placeholder="Masukkan Password..."
-                                    required>
+                                <div class="input-group">
+                                    <input type="password" id="password" name="password"
+                                        class="form-control form-control-custom input-password-custom"
+                                        placeholder="Masukkan Password..." required>
+                                    <div class="input-group-append">
+                                        <!-- Mengubah class btn menjadi btn-show-pass -->
+                                        <button class="btn btn-show-pass" type="button" id="togglePassword">
+                                            <i class="fas fa-eye" id="eyeIcon"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
 
                             <button type="submit"
@@ -115,6 +160,29 @@
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
+
+    <!-- Script untuk Toggle Show/Hide Password -->
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIcon');
+
+            // Cek apakah tipe saat ini adalah password
+            if (passwordInput.type === 'password') {
+                // Ubah ke text agar terlihat
+                passwordInput.type = 'text';
+                // Ubah ikon menjadi mata dicoret
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            } else {
+                // Kembalikan ke password agar tersembunyi
+                passwordInput.type = 'password';
+                // Kembalikan ikon ke mata terbuka
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }
+        });
+    </script>
 
 </body>
 
