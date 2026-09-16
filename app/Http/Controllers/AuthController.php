@@ -25,6 +25,13 @@ class AuthController extends Controller
 
             $user = Auth::user();
 
+            // Admin dan Pimpinan tidak wajib memiliki data Pegawai
+            if ($user->isAdmin() || $user->isPimpinan()) {
+                $request->session()->regenerate();
+
+                return redirect()->intended('/');
+            }
+
             // Pastikan user memiliki data pegawai
             if (!$user->pegawai) {
                 Auth::logout();

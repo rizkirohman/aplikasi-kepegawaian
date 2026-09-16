@@ -17,7 +17,12 @@ class StatusPegawaiMiddleware
             return $next($request);
         }
 
-        // Jika user tidak memiliki data pegawai
+        // Admin dan Pimpinan tidak wajib memiliki data Pegawai
+        if ($user->isAdmin() || $user->isPimpinan()) {
+            return $next($request);
+        }
+
+        // Pegawai wajib memiliki data Pegawai
         if (!$user->pegawai) {
             auth()->logout();
 
@@ -31,7 +36,7 @@ class StatusPegawaiMiddleware
                 ]);
         }
 
-        // Hanya pegawai Aktif yang boleh mengakses aplikasi
+        // Pegawai hanya boleh mengakses sistem jika statusnya Aktif
         if ($user->pegawai->status_pegawai !== 'Aktif') {
             auth()->logout();
 

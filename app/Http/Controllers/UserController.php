@@ -42,18 +42,21 @@ class UserController extends Controller
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|string|min:8',
             'role' => 'required|in:admin,pimpinan,pegawai',
-            'pegawai_id' => 'required|exists:pegawais,id',
+            'pegawai_id' => 'nullable|exists:pegawais,id|required_if:role,pegawai',
         ]);
 
-        // Pastikan pegawai belum memiliki akun
-        $pegawai = Pegawai::findOrFail($validated['pegawai_id']);
+        // Jika ada Pegawai yang dipilih, pastikan belum memiliki akun
+        if (!empty($validated['pegawai_id'])) {
 
-        if ($pegawai->user_id !== null) {
-            return back()
-                ->withInput()
-                ->withErrors([
-                    'pegawai_id' => 'Pegawai tersebut sudah memiliki akun.',
-                ]);
+            $pegawai = Pegawai::findOrFail($validated['pegawai_id']);
+
+            if ($pegawai->user_id !== null) {
+                return back()
+                    ->withInput()
+                    ->withErrors([
+                        'pegawai_id' => 'Pegawai tersebut sudah memiliki akun.',
+                    ]);
+            }
         }
 
         // Buat user
@@ -64,10 +67,12 @@ class UserController extends Controller
             'role' => $validated['role'],
         ]);
 
-        // Hubungkan user dengan pegawai
-        $pegawai->update([
-            'user_id' => $user->id,
-        ]);
+        // Hubungkan user dengan pegawai jika ada
+        if (!empty($validated['pegawai_id'])) {
+            $pegawai->update([
+                'user_id' => $user->id,
+            ]);
+        }
 
         return redirect()
             ->route('user.index')
@@ -107,28 +112,31 @@ class UserController extends Controller
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:8',
             'role' => 'required|in:admin,pimpinan,pegawai',
-            'pegawai_id' => 'required|exists:pegawais,id',
+            'pegawai_id' => 'nullable|exists:pegawais,id|required_if:role,pegawai',
         ]);
 
-        // Pastikan pegawai yang dipilih belum terhubung
-        // atau memang milik user yang sedang diedit.
-        $pegawai = Pegawai::findOrFail($validated['pegawai_id']);
+        // Jika ada Pegawai yang dipilih,
+        // pastikan belum terhubung dengan user lain.
+        if (!empty($validated['pegawai_id'])) {
 
-        if (
-            $pegawai->user_id !== null &&
-            $pegawai->user_id !== $user->id
-        ) {
-            return back()
-                ->withInput()
-                ->withErrors([
-                    'pegawai_id' => 'Pegawai tersebut sudah terhubung dengan user lain.',
-                ]);
+            $pegawai = Pegawai::findOrFail($validated['pegawai_id']);
+
+            if (
+                $pegawai->user_id !== null &&
+                $pegawai->user_id !== $user->id
+            ) {
+                return back()
+                    ->withInput()
+                    ->withErrors([
+                        'pegawai_id' => 'Pegawai tersebut sudah terhubung dengan user lain.',
+                    ]);
+            }
         }
 
-        // Cari pegawai lama yang terhubung dengan user ini.
+        // Simpan pegawai lama yang saat ini terhubung
         $pegawaiLama = $user->pegawai;
 
-        // Update data user.
+        // Update data user
         $user->name = $validated['name'];
         $user->email = $validated['email'];
         $user->role = $validated['role'];
@@ -139,17 +147,26 @@ class UserController extends Controller
 
         $user->save();
 
-        // Jika pegawai diganti, lepaskan hubungan pegawai lama.
-        if ($pegawaiLama && $pegawaiLama->id !== $pegawai->id) {
+        // Lepaskan hubungan pegawai lama
+        // jika pegawai diganti atau tidak lagi digunakan.
+        if (
+            $pegawaiLama &&
+            (
+                empty($validated['pegawai_id']) ||
+                $pegawaiLama->id != $validated['pegawai_id']
+            )
+        ) {
             $pegawaiLama->update([
                 'user_id' => null,
             ]);
         }
 
-        // Hubungkan dengan pegawai baru.
-        $pegawai->update([
-            'user_id' => $user->id,
-        ]);
+        // Hubungkan dengan pegawai baru jika ada
+        if (!empty($validated['pegawai_id'])) {
+            $pegawai->update([
+                'user_id' => $user->id,
+            ]);
+        }
 
         return redirect()
             ->route('user.index')

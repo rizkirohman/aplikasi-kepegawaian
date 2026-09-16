@@ -110,7 +110,7 @@
                         </label>
 
                         <select name="pegawai_id" id="pegawai_id"
-                            class="form-control @error('pegawai_id') is-invalid @enderror" required>
+                            class="form-control @error('pegawai_id') is-invalid @enderror">
 
                             <option value="">-- Pilih Pegawai --</option>
 
@@ -158,3 +158,24 @@
 
     </div>
 @endsection
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        const role = document.getElementById('role');
+        const pegawai = document.getElementById('pegawai_id');
+
+        function updatePegawaiRequired() {
+
+            if (role.value === 'pegawai') {
+                pegawai.required = true;
+            } else {
+                pegawai.required = false;
+            }
+        }
+
+        role.addEventListener('change', updatePegawaiRequired);
+
+        updatePegawaiRequired();
+    });
+</script>

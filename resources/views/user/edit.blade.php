@@ -154,3 +154,23 @@
 
     </div>
 @endsection
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        const role = document.getElementById('role');
+        const pegawai = document.getElementById('pegawai_id');
+
+        function updatePegawaiRequired() {
+
+            if (role.value === 'pegawai') {
+                pegawai.required = true;
+            } else {
+                pegawai.required = false;
+            }
+        }
+
+        role.addEventListener('change', updatePegawaiRequired);
+
+        updatePegawaiRequired();
+    });
+</script>
