@@ -104,19 +104,100 @@
 
     </div>
 
-    <!-- Informasi -->
-    {{-- <div class="card shadow mb-4">
+    {{-- Pegawai Mendekati Pensiun --}}
+    <div class="card shadow mb-4">
 
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">
-                Informasi Sistem
+                Pegawai Mendekati Pensiun
             </h6>
         </div>
 
         <div class="card-body">
-            Selamat datang di Sistem Informasi SDM.
+
+            @if ($pegawaiMendekatiPensiun->count() > 0)
+
+                <div class="table-responsive">
+
+                    <table class="table table-bordered table-hover">
+
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>NIP</th>
+                                <th>Jabatan</th>
+                                <th>Unit Kerja</th>
+                                <th>Pangkat/Golongan Terakhir</th>
+                                <th>BUP</th>
+                                <th>Tanggal Pensiun</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach ($pegawaiMendekatiPensiun as $pegawai)
+                                @php
+                                    $pangkatTerakhir = $pegawai->riwayatPangkat->first();
+                                @endphp
+
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+
+                                    <td>
+                                        {{ $pegawai->nama_lengkap }}
+                                    </td>
+
+                                    <td>
+                                        {{ $pegawai->nip }}
+                                    </td>
+
+                                    <td>
+                                        {{ $pegawai->jabatan?->nama_jabatan ?? '-' }}
+                                    </td>
+
+                                    <td>
+                                        {{ $pegawai->unitKerja?->nama_unit_kerja ?? '-' }}
+                                    </td>
+
+                                    <td>
+                                        @if ($pangkatTerakhir)
+                                            {{ $pangkatTerakhir->pangkat }}
+                                            /
+                                            {{ $pangkatTerakhir->golongan }}
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
+
+                                    <td>
+                                        {{ $pegawai->bup }} tahun
+                                    </td>
+
+                                    <td>
+                                        {{ $pegawai->tanggal_pensiun->format('d F Y') }}
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+            @else
+                <div class="text-center text-muted py-4">
+
+                    <p class="mb-0">
+                        Tidak ada pegawai yang akan memasuki masa pensiun
+                        dalam 1 tahun ke depan.
+                    </p>
+                </div>
+
+            @endif
+
         </div>
 
-    </div> --}}
+    </div>
 
 @endsection

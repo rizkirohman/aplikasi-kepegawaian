@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pegawai;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -24,11 +25,39 @@ class DashboardController extends Controller
             ->where('status_pegawai', 'Aktif')
             ->count();
 
+        // Periode 1 tahun ke depan
+        $hariIni = Carbon::today();
+        $satuTahunLagi = $hariIni->copy()->addYear();
+
+        // Pegawai yang akan pensiun dalam 1 tahun ke depan
+        $pegawaiMendekatiPensiun = Pegawai::with([
+            'unitKerja',
+            'jabatan',
+            'riwayatPangkat' => function ($query) {
+                $query->latest('tmt');
+            },
+        ])
+            ->where('status_pegawai', 'Aktif')
+            ->get()
+            ->filter(function ($pegawai) use ($hariIni, $satuTahunLagi) {
+                if (!$pegawai->tanggal_pensiun) {
+                    return false;
+                }
+
+                return $pegawai->tanggal_pensiun->between(
+                    $hariIni,
+                    $satuTahunLagi
+                );
+            })
+            ->sortBy('tanggal_pensiun')
+            ->values();
+
         return view('dashboard', compact(
             'totalPegawai',
             'totalPegawaiAktif',
             'totalDosen',
-            'totalTendik'
+            'totalTendik',
+            'pegawaiMendekatiPensiun'
         ));
     }
 }
