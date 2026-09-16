@@ -126,11 +126,12 @@
                                 <th>No</th>
                                 <th>Nama</th>
                                 <th>NIP</th>
-                                <th>Jabatan</th>
+                                <th>Jenis Pegawai</th>
                                 <th>Unit Kerja</th>
                                 <th>Pangkat/Golongan Terakhir</th>
                                 <th>BUP</th>
                                 <th>Tanggal Pensiun</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
 
@@ -153,7 +154,7 @@
                                     </td>
 
                                     <td>
-                                        {{ $pegawai->jabatan?->nama_jabatan ?? '-' }}
+                                        {{ $pegawai->jenis_pegawai }}
                                     </td>
 
                                     <td>
@@ -176,6 +177,12 @@
 
                                     <td>
                                         {{ $pegawai->tanggal_pensiun->format('d F Y') }}
+                                    </td>
+
+                                    <td>
+                                        <a href="{{ route('pegawai.show', $pegawai) }}" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
