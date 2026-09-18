@@ -20,7 +20,7 @@
                 </h6>
 
                 <span class="badge badge-primary">
-                    Total: {{ $pegawais->count() }} Pegawai
+                    Total: {{ $pegawais->total() }} Pegawai
                 </span>
 
             </div>
@@ -125,6 +125,10 @@
                     </div>
                 </form>
 
+                <a href="{{ route('laporan.pegawai.cetak', request()->query()) }}" target="_blank" class="btn btn-success">
+                    <i class="fas fa-print"></i> Cetak Laporan
+                </a>
+
                 <hr>
 
                 <div class="table-responsive">
@@ -190,6 +194,10 @@
                         </tbody>
 
                     </table>
+
+                    <div class="mt-3">
+                        {{ $pegawais->links() }}
+                    </div>
 
                 </div>
 

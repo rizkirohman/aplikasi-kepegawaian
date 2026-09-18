@@ -65,6 +65,10 @@ Route::get('/laporan/pegawai', [LaporanController::class, 'pegawai'])
     ->middleware(['auth', 'status.pegawai', 'admin.pimpinan'])
     ->name('laporan.pegawai');
 
+Route::get('/laporan/pegawai/cetak', [LaporanController::class, 'cetak'])
+    ->middleware(['auth', 'status.pegawai', 'admin.pimpinan'])
+    ->name('laporan.pegawai.cetak');
+
 // Dokumen Pegawai di Sidebar
 // Route::get('/dokumen-pegawai', [DokumenPegawaiController::class, 'all'])
 //     ->name('dokumen-pegawai.all')
