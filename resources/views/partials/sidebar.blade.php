@@ -54,46 +54,49 @@
     <hr class="sidebar-divider">
 
     <!-- Laporan -->
-    <div class="sidebar-heading">
-        Laporan
-    </div>
+    @if (auth()->user()->isAdmin() || auth()->user()->isPimpinan())
+        <div class="sidebar-heading">
+            Laporan
+        </div>
 
-    <li class="nav-item {{ request()->routeIs('laporan.pegawai') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('laporan.pegawai') }}">
-            <i class="fas fa-fw fa-file-alt"></i>
-            <span>Laporan Pegawai</span>
-        </a>
-    </li>
-
-    <hr class="sidebar-divider">
+        <li class="nav-item {{ request()->routeIs('laporan.pegawai') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('laporan.pegawai') }}">
+                <i class="fas fa-fw fa-file-alt"></i>
+                <span>Laporan Pegawai</span>
+            </a>
+        </li>
+        <hr class="sidebar-divider">
+    @endif
 
     <!-- Sistem -->
-    <div class="sidebar-heading">
-        Sistem
-    </div>
+    @if (auth()->user()->isAdmin())
+        <div class="sidebar-heading">
+            Sistem
+        </div>
 
-    <li class="nav-item {{ request()->routeIs('user.*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('user.index') }}">
-            <i class="fas fa-fw fa-user-cog"></i>
-            <span>User</span>
-        </a>
-    </li>
+        <li class="nav-item {{ request()->routeIs('user.*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('user.index') }}">
+                <i class="fas fa-fw fa-user-cog"></i>
+                <span>User</span>
+            </a>
+        </li>
 
-    <li class="nav-item {{ Request::is('unit-kerja*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('unit-kerja.index') }}">
-            <i class="fas fa-sitemap"></i>
-            <span>Unit Kerja</span>
-        </a>
-    </li>
+        <li class="nav-item {{ Request::is('unit-kerja*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('unit-kerja.index') }}">
+                <i class="fas fa-sitemap"></i>
+                <span>Unit Kerja</span>
+            </a>
+        </li>
 
-    <li class="nav-item {{ Request::is('jabatan*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('jabatan.index') }}">
-            <i class="fas fa-fw fa-id-card-alt"></i>
-            <span>Jabatan</span>
-        </a>
-    </li>
+        <li class="nav-item {{ Request::is('jabatan*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('jabatan.index') }}">
+                <i class="fas fa-fw fa-id-card-alt"></i>
+                <span>Jabatan</span>
+            </a>
+        </li>
 
-    <hr class="sidebar-divider d-none d-md-block">
+        <hr class="sidebar-divider d-none d-md-block">
+    @endif
 
     <!-- Toggle Sidebar -->
     <div class="text-center d-none d-md-inline">

@@ -62,7 +62,7 @@ Route::get('pegawai/{pegawai}/dokumen/{dokumen}/download', [DokumenPegawaiContro
     ->middleware(['auth', 'status.pegawai']);
 
 Route::get('/laporan/pegawai', [LaporanController::class, 'pegawai'])
-    ->middleware(['auth', 'status.pegawai'])
+    ->middleware(['auth', 'status.pegawai', 'admin.pimpinan'])
     ->name('laporan.pegawai');
 
 // Dokumen Pegawai di Sidebar

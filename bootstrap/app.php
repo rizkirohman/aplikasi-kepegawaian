@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\AdminOrPimpinanMiddleware;
 use App\Http\Middleware\PegawaiMiddleware;
 use App\Http\Middleware\PimpinanMiddleware;
 use App\Http\Middleware\StatusPegawaiMiddleware;
@@ -20,6 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'pimpinan' => PimpinanMiddleware::class,
             'pegawai' => PegawaiMiddleware::class,
             'status.pegawai' => StatusPegawaiMiddleware::class,
+            'admin.pimpinan' => AdminOrPimpinanMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
