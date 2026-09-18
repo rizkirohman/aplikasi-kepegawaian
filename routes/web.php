@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DokumenPegawaiController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\RiwayatJabatanController;
@@ -59,6 +60,10 @@ Route::resource('pegawai.dokumen', DokumenPegawaiController::class)
 Route::get('pegawai/{pegawai}/dokumen/{dokumen}/download', [DokumenPegawaiController::class, 'download'])
     ->name('pegawai.dokumen.download')
     ->middleware(['auth', 'status.pegawai']);
+
+Route::get('/laporan/pegawai', [LaporanController::class, 'pegawai'])
+    ->middleware(['auth', 'status.pegawai'])
+    ->name('laporan.pegawai');
 
 // Dokumen Pegawai di Sidebar
 // Route::get('/dokumen-pegawai', [DokumenPegawaiController::class, 'all'])

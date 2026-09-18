@@ -109,7 +109,8 @@
                                     </td>
 
                                     <td>
-                                        {{ $pegawai->jenis_pegawai }}
+                                        {{-- {{ $pegawai->jenis_pegawai }} --}}
+                                        {{ str_replace('Tenaga Kependidikan', 'Tendik', $pegawai->jenis_pegawai) }}
                                     </td>
 
                                     <td>

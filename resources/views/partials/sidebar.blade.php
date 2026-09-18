@@ -58,8 +58,8 @@
         Laporan
     </div>
 
-    <li class="nav-item">
-        <a class="nav-link" href="#">
+    <li class="nav-item {{ request()->routeIs('laporan.pegawai') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('laporan.pegawai') }}">
             <i class="fas fa-fw fa-file-alt"></i>
             <span>Laporan Pegawai</span>
         </a>
