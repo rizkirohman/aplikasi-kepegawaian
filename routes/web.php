@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuditLogController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DokumenPegawaiController;
@@ -72,6 +73,10 @@ Route::get('/laporan/pegawai/cetak', [LaporanController::class, 'cetak'])
 Route::get('/laporan/pegawai/export', [LaporanController::class, 'export'])
     ->middleware(['auth', 'status.pegawai', 'admin.pimpinan'])
     ->name('laporan.pegawai.export');
+
+Route::get('/audit-log', [AuditLogController::class, 'index'])
+    ->middleware(['auth', 'admin'])
+    ->name('audit-log.index');
 
 // Dokumen Pegawai di Sidebar
 // Route::get('/dokumen-pegawai', [DokumenPegawaiController::class, 'all'])

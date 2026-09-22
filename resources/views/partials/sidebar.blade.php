@@ -81,19 +81,28 @@
             </a>
         </li>
 
-        <li class="nav-item {{ Request::is('unit-kerja*') ? 'active' : '' }}">
+        <li class="nav-item {{ request()->routeIs('unit-kerja*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('unit-kerja.index') }}">
                 <i class="fas fa-sitemap"></i>
                 <span>Unit Kerja</span>
             </a>
         </li>
 
-        <li class="nav-item {{ Request::is('jabatan*') ? 'active' : '' }}">
+        <li class="nav-item {{ request()->routeIs('jabatan*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('jabatan.index') }}">
                 <i class="fas fa-fw fa-id-card-alt"></i>
                 <span>Jabatan</span>
             </a>
         </li>
+
+        @if (auth()->user()->isAdmin())
+            <li class="nav-item {{ request()->routeIs('audit-log.*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('audit-log.index') }}">
+                    <i class="fas fa-history fa-fw"></i>
+                    <span>Riwayat Aktivitas</span>
+                </a>
+            </li>
+        @endif
 
         <hr class="sidebar-divider d-none d-md-block">
     @endif
