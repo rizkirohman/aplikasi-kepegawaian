@@ -57,7 +57,7 @@ class DashboardController extends Controller
             'totalPegawaiAktif',
             'totalDosen',
             'totalTendik',
-            'pegawaiMendekatiPensiun'
+            'pegawaiMendekatiPensiun',
         ));
     }
 }

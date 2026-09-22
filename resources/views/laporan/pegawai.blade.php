@@ -129,6 +129,10 @@
                     <i class="fas fa-print"></i> Cetak Laporan
                 </a>
 
+                <a href="{{ route('laporan.pegawai.export', request()->query()) }}" class="btn btn-success">
+                    <i class="fas fa-file-csv"></i> Export CSV
+                </a>
+
                 <hr>
 
                 <div class="table-responsive">
