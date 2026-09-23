@@ -57,8 +57,7 @@
 
             <div class="card-body">
 
-                <form
-                    action="{{ route('pegawai.riwayat-jabatan.update', [$pegawai->id, $riwayatJabatan->id]) }}"
+                <form action="{{ route('pegawai.riwayat-jabatan.update', [$pegawai->id, $riwayatJabatan->id]) }}"
                     method="POST" enctype="multipart/form-data">
 
                     @csrf
@@ -185,12 +184,11 @@
                         </label>
 
                         <input type="file" name="dokumen_sk" id="dokumen_sk"
-                            class="form-control-file @error('dokumen_sk') is-invalid @enderror"
-                            accept=".pdf,.jpg,.jpeg,.png">
+                            class="form-control-file @error('dokumen_sk') is-invalid @enderror" accept=".pdf">
 
                         <small class="form-text text-muted">
                             Kosongkan jika tidak ingin mengganti dokumen.
-                            Format PDF, JPG, JPEG, PNG. Maksimal 2 MB.
+                            Format PDF. Maksimal 5 MB.
                         </small>
 
                         @error('dokumen_sk')
@@ -205,8 +203,7 @@
                     {{-- Tombol --}}
                     <div class="mt-4">
 
-                        <a href="{{ route('pegawai.riwayat-jabatan.index', $pegawai->id) }}"
-                            class="btn btn-secondary">
+                        <a href="{{ route('pegawai.riwayat-jabatan.index', $pegawai->id) }}" class="btn btn-secondary">
 
                             <i class="fas fa-arrow-left"></i>
                             Kembali

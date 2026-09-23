@@ -39,8 +39,7 @@
 
             <div class="card-body">
 
-                <form
-                    action="{{ route('pegawai.riwayat-pangkat.update', [$pegawai->id, $riwayatPangkat->id]) }}"
+                <form action="{{ route('pegawai.riwayat-pangkat.update', [$pegawai->id, $riwayatPangkat->id]) }}"
                     method="POST" enctype="multipart/form-data">
 
                     @csrf
@@ -156,10 +155,10 @@
                             </label>
 
                             <input type="file" name="dokumen_sk" id="dokumen_sk"
-                                class="form-control @error('dokumen_sk') is-invalid @enderror">
+                                class="form-control @error('dokumen_sk') is-invalid @enderror" accept=".pdf">
 
                             <small class="text-muted">
-                                PDF, JPG, JPEG, atau PNG. Maksimal 2 MB.
+                                Format PDF. Maksimal 5 MB.
                             </small>
 
                             @if ($riwayatPangkat->dokumen_sk)

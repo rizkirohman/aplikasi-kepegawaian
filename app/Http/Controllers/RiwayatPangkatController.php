@@ -48,15 +48,15 @@ class RiwayatPangkatController extends Controller
                 'tmt' => 'required|date',
                 'nomor_sk' => 'nullable|string|max:255',
                 'tanggal_sk' => 'nullable|date',
-                'dokumen_sk' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
+                'dokumen_sk' => 'nullable|file|mimes:pdf|max:5120',
             ],
             [
                 'pangkat.required' => 'Pangkat wajib diisi.',
                 'golongan.required' => 'Golongan wajib diisi.',
                 'tmt.required' => 'TMT wajib diisi.',
                 'dokumen_sk.file' => 'Dokumen SK harus berupa file.',
-                'dokumen_sk.mimes' => 'Dokumen SK harus berformat PDF, JPG, JPEG, atau PNG.',
-                'dokumen_sk.max' => 'Ukuran Dokumen SK maksimal 2 MB.',
+                'dokumen_sk.mimes' => 'Dokumen SK harus berformat PDF.',
+                'dokumen_sk.max' => 'Ukuran Dokumen SK maksimal 5 MB.',
             ]
         );
 
@@ -102,7 +102,7 @@ class RiwayatPangkatController extends Controller
                 'tmt' => 'required|date',
                 'nomor_sk' => 'nullable|string|max:255',
                 'tanggal_sk' => 'nullable|date',
-                'dokumen_sk' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
+                'dokumen_sk' => 'nullable|file|mimes:pdf|max:5120',
             ],
             [
                 'pangkat.required' => 'Pangkat wajib diisi.',
@@ -111,8 +111,8 @@ class RiwayatPangkatController extends Controller
                 'tmt.date' => 'Format TMT tidak valid.',
                 'tanggal_sk.date' => 'Format tanggal SK tidak valid.',
                 'dokumen_sk.file' => 'Dokumen SK harus berupa file.',
-                'dokumen_sk.mimes' => 'Dokumen SK harus berupa PDF, JPG, JPEG, atau PNG.',
-                'dokumen_sk.max' => 'Ukuran dokumen SK maksimal 2 MB.',
+                'dokumen_sk.mimes' => 'Dokumen SK harus berupa PDF.',
+                'dokumen_sk.max' => 'Ukuran dokumen SK maksimal 5 MB.',
             ]
         );
 

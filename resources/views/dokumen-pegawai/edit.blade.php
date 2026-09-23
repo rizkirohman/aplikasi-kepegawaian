@@ -309,8 +309,8 @@
                         <small class="form-text text-muted">
 
                             Kosongkan jika tidak ingin mengganti file.
-                            Format: PDF, JPG, JPEG, PNG, DOC, DOCX.
-                            Maksimal 2 MB.
+                            Format: PDF.
+                            Maksimal 5 MB.
 
                         </small>
 

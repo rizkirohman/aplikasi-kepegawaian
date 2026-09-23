@@ -17,6 +17,59 @@
 
             <div class="card-body">
 
+                <form action="{{ route('audit-log.index') }}" method="GET" class="mb-4">
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <label for="action">Aktivitas</label>
+
+                            <select name="action" id="action" class="form-control">
+                                <option value="">Semua Aktivitas</option>
+
+                                <option value="create" {{ request('action') === 'create' ? 'selected' : '' }}>
+                                    Create
+                                </option>
+
+                                <option value="update" {{ request('action') === 'update' ? 'selected' : '' }}>
+                                    Update
+                                </option>
+
+                                <option value="delete" {{ request('action') === 'delete' ? 'selected' : '' }}>
+                                    Delete
+                                </option>
+                            </select>
+                        </div>
+
+                        {{-- <div class="col-md-3">
+                            <label for="user_id">Pengguna</label>
+
+                            <select name="user_id" id="user_id" class="form-control">
+                                <option value="">Semua Pengguna</option>
+
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}"
+                                        {{ request('user_id') == $user->id ? 'selected' : '' }}>
+                                        {{ $user->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div> --}}
+
+                        <div class="col-md-2 d-flex align-items-end">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-search"></i>
+                            </button>
+
+                            <a href="{{ route('audit-log.index') }}" class="btn btn-secondary ml-1">
+                                <i class="fas fa-sync-alt"></i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </form>
+
                 <div class="table-responsive">
 
                     <table class="table table-bordered table-hover">

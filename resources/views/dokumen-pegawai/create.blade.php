@@ -278,11 +278,11 @@
                         </label>
 
                         <input type="file" name="file" id="file"
-                            class="form-control-file @error('file') is-invalid @enderror" required>
+                            class="form-control-file @error('file') is-invalid @enderror" required accept=".pdf">
 
                         <small class="form-text text-muted">
-                            Format: PDF, JPG, JPEG, PNG, DOC, DOCX.
-                            Maksimal 2 MB.
+                            Format: PDF.
+                            Maksimal 5 MB.
                         </small>
 
                         @error('file')

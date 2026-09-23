@@ -55,7 +55,7 @@ class DokumenPegawaiController extends Controller
             'kategori' => 'required|string|max:255',
             'nomor_dokumen' => 'nullable|string|max:255',
             'tanggal_dokumen' => 'nullable|date',
-            'file' => 'required|file|mimes:pdf,jpg,jpeg,png,doc,docx|max:2048',
+            'file' => 'required|file|mimes:pdf|max:5120',
             'keterangan' => 'nullable|string',
         ]);
 
@@ -117,7 +117,7 @@ class DokumenPegawaiController extends Controller
             'kategori' => 'required|string|max:255',
             'nomor_dokumen' => 'nullable|string|max:255',
             'tanggal_dokumen' => 'nullable|date',
-            'file' => 'nullable|file|mimes:pdf,jpg,jpeg,png,doc,docx|max:2048',
+            'file' => 'nullable|file|mimes:pdf|max:5120',
             'keterangan' => 'nullable|string',
         ]);
 

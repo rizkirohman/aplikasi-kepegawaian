@@ -51,7 +51,7 @@ class RiwayatJabatanController extends Controller
             'tmt' => 'required|date',
             'nomor_sk' => 'nullable|string|max:255',
             'tanggal_sk' => 'nullable|date',
-            'dokumen_sk' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'dokumen_sk' => 'nullable|file|mimes:pdf|max:5120',
         ]);
 
         if ($request->hasFile('dokumen_sk')) {
@@ -110,7 +110,7 @@ class RiwayatJabatanController extends Controller
             'tmt' => 'required|date',
             'nomor_sk' => 'nullable|string|max:255',
             'tanggal_sk' => 'nullable|date',
-            'dokumen_sk' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'dokumen_sk' => 'nullable|file|mimes:pdf|max:5120',
         ]);
 
         // Jika upload dokumen baru

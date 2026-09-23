@@ -157,11 +157,10 @@
                         </label>
 
                         <input type="file" name="dokumen_sk" id="dokumen_sk"
-                            class="form-control-file @error('dokumen_sk') is-invalid @enderror"
-                            accept=".pdf,.jpg,.jpeg,.png">
+                            class="form-control-file @error('dokumen_sk') is-invalid @enderror" accept=".pdf">
 
                         <small class="form-text text-muted">
-                            Format: PDF, JPG, JPEG, PNG. Maksimal 2 MB.
+                            Format PDF. Maksimal 5 MB.
                         </small>
 
                         @error('dokumen_sk')
