@@ -170,8 +170,8 @@
                                         <td>
 
                                             @if ($dokumen->file)
-                                                <a href="{{ asset('storage/' . $dokumen->file) }}" target="_blank"
-                                                    class="btn btn-info btn-sm" title="Lihat Dokumen">
+                                                <a href="{{ route('pegawai.dokumen.view', [$pegawai->id, $dokumen->id]) }}"
+                                                    target="_blank" class="btn btn-info btn-sm" title="Lihat Dokumen">
 
                                                     <i class="fas fa-eye"></i>
 

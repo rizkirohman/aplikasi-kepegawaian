@@ -62,6 +62,10 @@ Route::get('pegawai/{pegawai}/dokumen/{dokumen}/download', [DokumenPegawaiContro
     ->name('pegawai.dokumen.download')
     ->middleware(['auth', 'status.pegawai']);
 
+Route::get('pegawai/{pegawai}/dokumen/{dokumen}/view', [DokumenPegawaiController::class, 'view'])
+    ->name('pegawai.dokumen.view')
+    ->middleware(['auth', 'status.pegawai']);
+
 Route::get('/laporan/pegawai', [LaporanController::class, 'pegawai'])
     ->middleware(['auth', 'status.pegawai', 'admin.pimpinan'])
     ->name('laporan.pegawai');

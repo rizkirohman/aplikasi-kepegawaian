@@ -61,7 +61,7 @@ class DokumenPegawaiController extends Controller
 
         $validated['file'] = $request
             ->file('file')
-            ->store('dokumen-pegawai', 'public');
+            ->store('dokumen-pegawai', 'local');
 
         DokumenPegawai::create($validated);
 
@@ -126,13 +126,13 @@ class DokumenPegawaiController extends Controller
 
             // Hapus file lama
             if ($dokumen->file) {
-                Storage::disk('public')->delete($dokumen->file);
+                Storage::disk('local')->delete($dokumen->file);
             }
 
             // Simpan file baru
             $validated['file'] = $request
                 ->file('file')
-                ->store('dokumen-pegawai', 'public');
+                ->store('dokumen-pegawai', 'local');
         }
 
         // Update data dokumen
@@ -157,7 +157,7 @@ class DokumenPegawaiController extends Controller
 
         // Hapus file dari storage
         if ($dokumen->file) {
-            Storage::disk('public')->delete($dokumen->file);
+            Storage::disk('local')->delete($dokumen->file);
         }
 
         // Hapus data dari database
@@ -180,13 +180,33 @@ class DokumenPegawaiController extends Controller
 
         Gate::authorize('view', $pegawai);
 
-        if (!Storage::disk('public')->exists($dokumen->file)) {
+        if (!Storage::disk('local')->exists($dokumen->file)) {
             abort(404, 'File dokumen tidak ditemukan.');
         }
 
-        return Storage::disk('public')->download(
-            $dokumen->file
+        $namaFile = $dokumen->nama_dokumen . '.pdf';
+
+        return Storage::disk('local')->download(
+            $dokumen->file,
+            $namaFile
         );
+    }
+
+    public function view(Pegawai $pegawai, DokumenPegawai $dokumen)
+    {
+        if ($dokumen->pegawai_id !== $pegawai->id) {
+            abort(404);
+        }
+
+        Gate::authorize('view', $pegawai);
+
+        if (!Storage::disk('local')->exists($dokumen->file)) {
+            abort(404, 'File dokumen tidak ditemukan.');
+        }
+
+        $path = Storage::disk('local')->path($dokumen->file);
+
+        return response()->file($path);
     }
 
     /**
