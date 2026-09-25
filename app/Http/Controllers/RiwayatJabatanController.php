@@ -57,7 +57,7 @@ class RiwayatJabatanController extends Controller
         if ($request->hasFile('dokumen_sk')) {
             $validated['dokumen_sk'] = $request
                 ->file('dokumen_sk')
-                ->store('dokumen-jabatan', 'public');
+                ->store('dokumen-jabatan', 'local');
         }
 
         $pegawai->riwayatJabatan()->create($validated);
@@ -118,14 +118,14 @@ class RiwayatJabatanController extends Controller
 
             // Hapus dokumen lama
             if ($riwayatJabatan->dokumen_sk) {
-                Storage::disk('public')
+                Storage::disk('local')
                     ->delete($riwayatJabatan->dokumen_sk);
             }
 
             // Simpan dokumen baru
             $validated['dokumen_sk'] = $request
                 ->file('dokumen_sk')
-                ->store('dokumen-jabatan', 'public');
+                ->store('dokumen-jabatan', 'local');
         }
 
         $riwayatJabatan->update($validated);
@@ -148,7 +148,7 @@ class RiwayatJabatanController extends Controller
 
         // Hapus file dokumen jika ada
         if ($riwayatJabatan->dokumen_sk) {
-            Storage::disk('public')
+            Storage::disk('local')
                 ->delete($riwayatJabatan->dokumen_sk);
         }
 
@@ -157,5 +157,22 @@ class RiwayatJabatanController extends Controller
 
         return redirect()->route('pegawai.riwayat-jabatan.index', $pegawai->id)
             ->with('success', 'Riwayat jabatan berhasil dihapus.');
+        }
+
+        public function view(Pegawai $pegawai, RiwayatJabatan $riwayatJabatan)
+        {
+            if ($riwayatJabatan->pegawai_id !== $pegawai->id) {
+                abort(404);
+            }
+
+            Gate::authorize('view', $pegawai);
+
+            if (!Storage::disk('local')->exists($riwayatJabatan->dokumen_sk)) {
+                abort(404, 'File dokumen SK tidak ditemukan.');
+            }
+
+            $path = Storage::disk('local')->path($riwayatJabatan->dokumen_sk);
+
+            return response()->file($path);
         }
 }

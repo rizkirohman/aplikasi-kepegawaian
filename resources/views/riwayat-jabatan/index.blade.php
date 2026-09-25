@@ -135,8 +135,8 @@
 
                                     <td>
                                         @if ($riwayat->dokumen_sk)
-                                            <a href="{{ asset('storage/' . $riwayat->dokumen_sk) }}" target="_blank"
-                                                class="btn btn-sm btn-info">
+                                            <a href="{{ route('pegawai.riwayat-jabatan.view', [$pegawai->id, $riwayat->id]) }}"
+                                                target="_blank" class="btn btn-sm btn-info" title="Lihat Dokumen SK">
 
                                                 <i class="fas fa-file-alt"></i>
                                                 Lihat

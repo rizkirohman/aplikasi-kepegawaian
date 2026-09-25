@@ -57,6 +57,10 @@ Route::get('pegawai/{pegawai}/riwayat-pangkat/{riwayatPangkat}/view', [RiwayatPa
 Route::resource('pegawai.riwayat-jabatan', RiwayatJabatanController::class)
     ->middleware(['auth', 'status.pegawai']);
 
+Route::get('pegawai/{pegawai}/riwayat-jabatan/{riwayatJabatan}/view', [RiwayatJabatanController::class, 'view'])
+    ->name('pegawai.riwayat-jabatan.view')
+    ->middleware(['auth', 'status.pegawai']);
+
 Route::resource('pegawai.dokumen', DokumenPegawaiController::class)
     ->parameters(['dokumen' => 'dokumen',])
     ->middleware(['auth', 'status.pegawai'])
