@@ -63,7 +63,7 @@ class RiwayatPangkatController extends Controller
         if ($request->hasFile('dokumen_sk')) {
             $validated['dokumen_sk'] = $request
                 ->file('dokumen_sk')
-                ->store('dokumen-pangkat', 'public');
+                ->store('dokumen-pangkat', 'local');
         }
 
         $pegawai->riwayatPangkat()->create($validated);
@@ -119,12 +119,12 @@ class RiwayatPangkatController extends Controller
         if ($request->hasFile('dokumen_sk')) {
 
             if ($riwayatPangkat->dokumen_sk) {
-                Storage::disk('public')->delete($riwayatPangkat->dokumen_sk);
+                Storage::disk('local')->delete($riwayatPangkat->dokumen_sk);
             }
 
             $validated['dokumen_sk'] = $request
                 ->file('dokumen_sk')
-                ->store('dokumen-pangkat', 'public');
+                ->store('dokumen-pangkat', 'local');
         }
 
         $riwayatPangkat->update($validated);
@@ -143,7 +143,7 @@ class RiwayatPangkatController extends Controller
         Gate::authorize('delete', $pegawai);
 
         if ($riwayatPangkat->dokumen_sk) {
-            Storage::disk('public')->delete($riwayatPangkat->dokumen_sk);
+            Storage::disk('local')->delete($riwayatPangkat->dokumen_sk);
         }
 
         $riwayatPangkat->delete();
@@ -151,5 +151,22 @@ class RiwayatPangkatController extends Controller
         return redirect()
             ->route('pegawai.riwayat-pangkat.index', $pegawai)
             ->with('success', 'Riwayat pangkat berhasil dihapus.');
+    }
+
+    public function view(Pegawai $pegawai, RiwayatPangkat $riwayatPangkat)
+    {
+        if ($riwayatPangkat->pegawai_id !== $pegawai->id) {
+            abort(404);
+        }
+
+        Gate::authorize('view', $pegawai);
+
+        if (!Storage::disk('local')->exists($riwayatPangkat->dokumen_sk)) {
+            abort(404, 'File dokumen SK tidak ditemukan.');
+        }
+
+        $path = Storage::disk('local')->path($riwayatPangkat->dokumen_sk);
+
+        return response()->file($path);
     }
 }

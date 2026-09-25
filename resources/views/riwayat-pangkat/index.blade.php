@@ -175,11 +175,10 @@
                                         <td>
 
                                             @if ($riwayat->dokumen_sk)
-                                                <a href="{{ asset('storage/' . $riwayat->dokumen_sk) }}" target="_blank"
-                                                    class="btn btn-info btn-sm" title="Lihat Dokumen SK">
+                                                <a href="{{ route('pegawai.riwayat-pangkat.view', [$pegawai->id, $riwayat->id]) }}"
+                                                    target="_blank" class="btn btn-info btn-sm" title="Lihat Dokumen SK">
 
-                                                    <i class="fas fa-file"></i>
-                                                    Lihat
+                                                    <i class="fas fa-file"></i> Lihat
 
                                                 </a>
                                             @else

@@ -50,6 +50,10 @@ Route::resource('pegawai.riwayat-pangkat', RiwayatPangkatController::class)
     ->middleware(['auth', 'status.pegawai'])
     ->except(['show']);
 
+Route::get('pegawai/{pegawai}/riwayat-pangkat/{riwayatPangkat}/view', [RiwayatPangkatController::class, 'view'])
+    ->name('pegawai.riwayat-pangkat.view')
+    ->middleware(['auth', 'status.pegawai']);
+
 Route::resource('pegawai.riwayat-jabatan', RiwayatJabatanController::class)
     ->middleware(['auth', 'status.pegawai']);
 
