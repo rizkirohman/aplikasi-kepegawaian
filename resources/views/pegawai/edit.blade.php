@@ -238,8 +238,32 @@
                                 Status Kepegawaian
                             </label>
 
-                            <input type="text" name="status_kepegawaian" id="status_kepegawaian" class="form-control"
-                                value="{{ old('status_kepegawaian', $pegawai->status_kepegawaian) }}">
+                            {{-- <input type="text" name="status_kepegawaian" id="status_kepegawaian" class="form-control"
+                                value="{{ old('status_kepegawaian', $pegawai->status_kepegawaian) }}"> --}}
+
+                            <select name="status_kepegawaian" id="status_kepegawaian" class="form-control">
+                                <option value="" disabled
+                                    {{ old('status_kepegawaian', $pegawai->status_kepegawaian) == '' ? 'selected' : '' }}>
+                                    -- Pilih Status Kepegawaian --</option>
+                                <option value="CPNS"
+                                    {{ old('status_kepegawaian', $pegawai->status_kepegawaian) == 'CPNS' ? 'selected' : '' }}>
+                                    CPNS</option>
+                                <option value="PNS"
+                                    {{ old('status_kepegawaian', $pegawai->status_kepegawaian) == 'PNS' ? 'selected' : '' }}>
+                                    PNS</option>
+                                <option value="PTT"
+                                    {{ old('status_kepegawaian', $pegawai->status_kepegawaian) == 'PTT' ? 'selected' : '' }}>
+                                    PTT</option>
+                                <option value="CPT"
+                                    {{ old('status_kepegawaian', $pegawai->status_kepegawaian) == 'CPT' ? 'selected' : '' }}>
+                                    CPT</option>
+                                <option value="PT"
+                                    {{ old('status_kepegawaian', $pegawai->status_kepegawaian) == 'PT' ? 'selected' : '' }}>
+                                    PT</option>
+                                <option value="PPPK"
+                                    {{ old('status_kepegawaian', $pegawai->status_kepegawaian) == 'PPPK' ? 'selected' : '' }}>
+                                    PPPK</option>
+                            </select>
                         </div>
 
                         {{-- Status Pegawai --}}
