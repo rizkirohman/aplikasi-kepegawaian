@@ -40,7 +40,7 @@ class PegawaiController extends Controller
             $query->where('jenis_pegawai', $request->jenis_pegawai);
         }
 
-        $pegawais = $query->paginate(5)->withQueryString();
+        $pegawais = $query->paginate(10)->withQueryString();
 
         return view('pegawai.index', compact('pegawais'));
     }

@@ -48,7 +48,7 @@ class LaporanController extends Controller
 
         $pegawais = $query
             ->orderBy('nama_lengkap')
-            ->paginate(5)
+            ->paginate(10)
             ->withQueryString();
 
         $unitKerjas = UnitKerja::orderBy('nama_unit_kerja')->get();
