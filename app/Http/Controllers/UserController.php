@@ -41,7 +41,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|string|min:8',
-            'role' => 'required|in:admin,pimpinan,pegawai',
+            'role' => 'required|in:admin,admin_sdm,pimpinan,pegawai',
             'pegawai_id' => 'nullable|exists:pegawais,id|required_if:role,pegawai',
         ]);
 
@@ -111,7 +111,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:8',
-            'role' => 'required|in:admin,pimpinan,pegawai',
+            'role' => 'required|in:admin,admin_sdm,pimpinan,pegawai',
             'pegawai_id' => 'nullable|exists:pegawais,id|required_if:role,pegawai',
         ]);
 

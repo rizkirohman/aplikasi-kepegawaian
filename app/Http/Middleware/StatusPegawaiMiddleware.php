@@ -17,8 +17,8 @@ class StatusPegawaiMiddleware
             return $next($request);
         }
 
-        // Admin dan Pimpinan tidak wajib memiliki data Pegawai
-        if ($user->isAdmin() || $user->isPimpinan()) {
+        // Admin, Admin SDM, dan Pimpinan tidak wajib memiliki data Pegawai
+        if ($user->isAdmin() || $user->isAdminSdm() || $user->isPimpinan()) {
             return $next($request);
         }
 

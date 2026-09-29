@@ -12,7 +12,7 @@ class PegawaiPolicy
      */
     public function before(User $user, string $ability): ?bool
     {
-        if ($user->isAdmin()) {
+        if ($user->isAdmin() || $user->isAdminSdm()) {
             return true;
         }
 

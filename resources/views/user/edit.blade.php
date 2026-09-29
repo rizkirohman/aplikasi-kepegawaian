@@ -87,12 +87,19 @@
                         <select name="role" id="role"
                             class="form-control custom-select @error('role') is-invalid @enderror" required>
                             <option value="">-- Pilih Role --</option>
+
                             <option value="admin" {{ old('role', $user->role) === 'admin' ? 'selected' : '' }}>
                                 Admin
                             </option>
+
+                            <option value="admin_sdm" {{ old('role', $user->role) === 'admin_sdm' ? 'selected' : '' }}>
+                                Admin SDM
+                            </option>
+
                             <option value="pimpinan" {{ old('role', $user->role) === 'pimpinan' ? 'selected' : '' }}>
                                 Pimpinan
                             </option>
+
                             <option value="pegawai" {{ old('role', $user->role) === 'pegawai' ? 'selected' : '' }}>
                                 Pegawai
                             </option>

@@ -75,7 +75,11 @@
                                             <span class="badge bg-danger text-white">
                                                 Admin
                                             </span>
-                                        @elseif($user->role === 'pimpinan')
+                                        @elseif ($user->role === 'admin_sdm')
+                                            <span class="badge bg-success text-white">
+                                                Admin SDM
+                                            </span>
+                                        @elseif ($user->role === 'pimpinan')
                                             <span class="badge bg-warning text-dark">
                                                 Pimpinan
                                             </span>

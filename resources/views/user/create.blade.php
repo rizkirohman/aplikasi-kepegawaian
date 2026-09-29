@@ -86,6 +86,10 @@
                                 Admin
                             </option>
 
+                            <option value="admin_sdm" {{ old('role') === 'admin_sdm' ? 'selected' : '' }}>
+                                Admin SDM
+                            </option>
+
                             <option value="pimpinan" {{ old('role') === 'pimpinan' ? 'selected' : '' }}>
                                 Pimpinan
                             </option>

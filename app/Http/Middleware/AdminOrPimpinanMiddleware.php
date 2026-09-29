@@ -12,7 +12,7 @@ class AdminOrPimpinanMiddleware
     {
         $user = $request->user();
 
-        if ($user && ($user->isAdmin() || $user->isPimpinan())) {
+        if ($user && ($user->isAdmin() || $user->isAdminSdm() || $user->isPimpinan())) {
             return $next($request);
         }
 

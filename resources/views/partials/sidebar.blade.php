@@ -54,7 +54,7 @@
     <hr class="sidebar-divider">
 
     <!-- Laporan -->
-    @if (auth()->user()->isAdmin() || auth()->user()->isPimpinan())
+    @if (auth()->user()->isAdmin() || auth()->user()->isAdminSdm() || auth()->user()->isPimpinan())
         <div class="sidebar-heading">
             Laporan
         </div>
