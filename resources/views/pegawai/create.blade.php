@@ -402,6 +402,11 @@
 
                                 <option value="">-- Pilih Jabatan Fungsional --</option>
 
+                                <option value="Tenaga Pengajar"
+                                    {{ old('jabatan_fungsional') == 'Tenaga Pengajar' ? 'selected' : '' }}>
+                                    Tenaga Pengajar
+                                </option>
+
                                 <option value="Asisten Ahli"
                                     {{ old('jabatan_fungsional') == 'Asisten Ahli' ? 'selected' : '' }}>
                                     Asisten Ahli

@@ -93,7 +93,7 @@ class PegawaiController extends Controller
 
                 'pendidikan_terakhir' => 'nullable|in:SMA,D3,S1,S2,S3',
 
-                'jabatan_fungsional' => 'nullable|in:Asisten Ahli,Lektor,Lektor Kepala,Profesor',
+                'jabatan_fungsional' => 'nullable|in:Tenaga Pengajar,Asisten Ahli,Lektor,Lektor Kepala,Profesor',
             ],
             [
                 'nip.required' => 'NIP wajib diisi.',
@@ -199,7 +199,7 @@ class PegawaiController extends Controller
 
                 'pendidikan_terakhir' => 'nullable|in:SMA,D3,S1,S2,S3',
 
-                'jabatan_fungsional' => 'nullable|in:Asisten Ahli,Lektor,Lektor Kepala,Profesor',
+                'jabatan_fungsional' => 'nullable|in:Tenaga Pengajar,Asisten Ahli,Lektor,Lektor Kepala,Profesor',
             ],
             [
                 'nip.required' => 'NIP wajib diisi.',

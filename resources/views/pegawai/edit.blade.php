@@ -361,7 +361,7 @@
 
                                 <option value="">-- Pilih Jabatan Fungsional --</option>
 
-                                @foreach (['Asisten Ahli', 'Lektor', 'Lektor Kepala', 'Profesor'] as $jabatanFungsional)
+                                @foreach (['Tenaga Pengajar', 'Asisten Ahli', 'Lektor', 'Lektor Kepala', 'Profesor'] as $jabatanFungsional)
                                     <option value="{{ $jabatanFungsional }}"
                                         {{ old('jabatan_fungsional', $pegawai->jabatan_fungsional) == $jabatanFungsional ? 'selected' : '' }}>
                                         {{ $jabatanFungsional }}
